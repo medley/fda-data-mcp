@@ -1,0 +1,42 @@
+{
+  "name": "fda-data-mcp",
+  "version": "0.2.0",
+  "description": "Thin npm wrapper for the hosted FDA Data MCP endpoint.",
+  "license": "MIT",
+  "type": "commonjs",
+  "bin": {
+    "fda-data-mcp": "bin/fda-data-mcp.js"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "bin",
+    "lib"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "fda",
+    "regulatory",
+    "compliance",
+    "manufacturing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medley/fda-data-mcp.git"
+  },
+  "homepage": "https://github.com/medley/fda-data-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/medley/fda-data-mcp/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "mcp-remote": "^0.1.38"
+  }
+}
