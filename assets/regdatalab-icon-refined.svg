@@ -1,0 +1,19 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">RegDataLab icon</title>
+  <desc id="desc">Refined stacked data layers icon.</desc>
+  <defs>
+    <linearGradient id="iconStroke" x1="20" y1="14" x2="108" y2="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#55D6FF"/>
+      <stop offset="100%" stop-color="#2D93FF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#iconStroke)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="64,12 106,30 64,48 22,30"/>
+    <polyline points="22,44 22,67 64,85 106,67 106,44"/>
+    <line x1="22" y1="44" x2="64" y2="62"/>
+    <line x1="106" y1="44" x2="64" y2="62"/>
+    <polyline points="22,68 22,92 64,110 106,92 106,68" opacity="0.96"/>
+    <line x1="22" y1="68" x2="64" y2="86" opacity="0.96"/>
+    <line x1="106" y1="68" x2="64" y2="86" opacity="0.96"/>
+  </g>
+</svg>

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/regdatalab-logo-light-refined.svg" alt="RegData Lab" width="320">
+</p>
+
 # FDA Data MCP
 
 Hosted MCP server for FDA regulatory, manufacturing, and compliance intelligence.
@@ -8,8 +12,6 @@ This is the public install and discovery repo for **FDA Data MCP**. The live MCP
 [![Connect Guide](https://img.shields.io/badge/docs-connect.md-0369a1?style=flat-square)](https://www.regdatalab.com/connect.md)
 [![Release](https://img.shields.io/github/v/release/medley/fda-data-mcp?display_name=tag&style=flat-square)](https://github.com/medley/fda-data-mcp/releases)
 [![GitHub Pages](https://github.com/medley/fda-data-mcp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/medley/fda-data-mcp/actions/workflows/pages/pages-build-deployment)
-
-![FDA Data MCP homepage screenshot](./assets/fda-data-mcp-homepage.png)
 
 ## Quick Links
 
