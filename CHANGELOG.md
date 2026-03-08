@@ -6,14 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-### Added
-
-- Homepage screenshot in the README so GitHub visitors can see the live product before they install it.
-
 ## [v0.1.0] - 2026-03-08
 
 ### Added
 
+- Homepage screenshot in the README so GitHub visitors can see the live product before they install it.
 - Public trust and support files: `LICENSE`, `SECURITY.md`, `SUPPORT.md`, and GitHub issue-routing config.
 - Marketplace metadata for hosted MCP discovery: `server.json`, `smithery.yaml`, and `glama.json`.
 - Lightweight validation CI for metadata and canonical hosted endpoint references.
