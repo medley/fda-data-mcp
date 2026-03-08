@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">RegDataLab square mark</title>
+  <desc id="desc">Refined stacked data layers icon on dark rounded square.</desc>
+  <defs>
+    <linearGradient id="bg" x1="42" y1="30" x2="470" y2="482" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#101B43"/>
+      <stop offset="100%" stop-color="#0B1434"/>
+    </linearGradient>
+    <linearGradient id="iconStroke" x1="120" y1="84" x2="394" y2="392" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#55D6FF"/>
+      <stop offset="100%" stop-color="#2D93FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="104" fill="url(#bg)"/>
+  <g fill="none" stroke="url(#iconStroke)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" transform="translate(64 44)">
+    <polygon points="192,28 310,80 192,132 74,80"/>
+    <polyline points="74,120 74,186 192,238 310,186 310,120"/>
+    <line x1="74" y1="120" x2="192" y2="172"/>
+    <line x1="310" y1="120" x2="192" y2="172"/>
+    <polyline points="74,190 74,256 192,308 310,256 310,190" opacity="0.96"/>
+    <line x1="74" y1="190" x2="192" y2="242" opacity="0.96"/>
+    <line x1="310" y1="190" x2="192" y2="242" opacity="0.96"/>
+  </g>
+</svg>
