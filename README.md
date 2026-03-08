@@ -89,13 +89,13 @@ Local example from a cloned repo:
 FDA_DATA_API_KEY=YOUR_API_KEY node bin/fda-data-mcp.js
 ```
 
-Planned public install command after the first npm publish:
+Published npm install command:
 
 ```bash
 FDA_DATA_API_KEY=YOUR_API_KEY npx -y fda-data-mcp
 ```
 
-The wrapper is ready in the repo now, but it is not published to npm yet. Until that first publish happens, the hosted HTTP setup above remains the public install path.
+This is useful for stdio-first MCP clients that want a local command instead of direct remote HTTP. The hosted HTTP setup above is still the simplest path when your client supports remote MCP natively.
 
 ## Example Prompts
 

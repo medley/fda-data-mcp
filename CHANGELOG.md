@@ -6,15 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [v0.2.0] - 2026-03-08
+
 ### Added
 
-- Publish-ready `fda-data-mcp` npm wrapper package built on top of `mcp-remote`.
+- Published `fda-data-mcp` npm wrapper package built on top of `mcp-remote`.
 - Wrapper entrypoint and config helpers for stdio clients that need a local command instead of direct remote HTTP.
 - A dedicated GitHub social preview image asset for repo sharing.
 
 ### Changed
 
 - Added a release badge and wrapper-package links to the README.
+- Updated the README to treat `npx -y fda-data-mcp` as the live install path for stdio clients.
 - Removed internal `docs/plans` files from the public repo surface to keep the repo marketplace-facing.
 
 ## [v0.1.0] - 2026-03-08
