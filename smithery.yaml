@@ -1,0 +1,27 @@
+# Smithery configuration for the hosted FDA Data MCP server.
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - apiKey
+    properties:
+      apiKey:
+        type: string
+        description: Your FDA Data MCP API key from regdatalab.com/signup.
+  commandFunction:
+    |-
+    config => ({
+      command: 'npx',
+      args: [
+        '-y',
+        'mcp-remote',
+        'https://www.regdatalab.com/mcp',
+        '--transport',
+        'http-only',
+        '--header',
+        `Authorization: Bearer ${config.apiKey}`
+      ],
+      env: {}
+    })
