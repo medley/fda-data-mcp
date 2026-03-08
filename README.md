@@ -1,24 +1,41 @@
-# FDA Data MCP (Public Setup Docs)
+# FDA Data MCP
 
-Public setup/config repo for connecting AI agents to **FDA Data MCP** — a production MCP server for FDA facilities, recalls, inspections, 510(k), PMA, and company intelligence.
+Hosted MCP server for FDA regulatory, manufacturing, and compliance intelligence.
 
-## Canonical links
+This is the public install and discovery repo for **FDA Data MCP**. The live MCP endpoint is hosted at **RegDataLab**. The private backend, ingestion system, and production data pipeline are not open-sourced here.
 
-- Website: https://www.regdatalab.com
+## Quick Links
+
+- Website: [regdatalab.com](https://www.regdatalab.com)
 - MCP endpoint: `https://www.regdatalab.com/mcp`
-- Connect guide: https://www.regdatalab.com/connect.md
-- Tool docs: https://www.regdatalab.com/docs
-- LLM context: https://www.regdatalab.com/llms.txt
-- Full LLM context: https://www.regdatalab.com/llms-full.txt
-- Pricing / signup: https://www.regdatalab.com/pricing · https://www.regdatalab.com/signup
+- Connect guide: [regdatalab.com/connect.md](https://www.regdatalab.com/connect.md)
+- Product docs: [regdatalab.com/docs](https://www.regdatalab.com/docs)
+- Pricing: [regdatalab.com/pricing](https://www.regdatalab.com/pricing)
+- Signup: [regdatalab.com/signup](https://www.regdatalab.com/signup)
 
-## Quick start (Claude Code)
+## What It Does
+
+FDA Data MCP gives AI agents structured access to FDA data for questions like:
+
+- Which facilities does this company operate?
+- Has FDA inspected them recently?
+- Were those inspections `NAI`, `VAI`, or `OAI`?
+- Are there recalls, enforcement actions, or import refusals?
+- What does FDA show for 510(k), PMA, Drugs@FDA, NDC, and related regulatory records?
+
+The strongest current use case is **manufacturing and compliance intelligence** for pharma, biotech, and medtech teams.
+
+## Quick Start
+
+### Claude Code
 
 ```bash
 claude mcp add fda-data https://www.regdatalab.com/mcp --transport http --header "Authorization: Bearer YOUR_API_KEY"
 ```
 
-## MCP config JSON (Claude Desktop / Cursor / Windsurf)
+### Claude Desktop / Cursor / Windsurf
+
+Add this to your MCP config:
 
 ```json
 {
@@ -33,28 +50,65 @@ claude mcp add fda-data https://www.regdatalab.com/mcp --transport http --header
 }
 ```
 
-## What this MCP server covers
+### OpenAI / Generic MCP Clients
 
-- FDA facility lookup + company resolution
-- Enforcement / recall search and traceability
-- 510(k) clearances, PMA approvals, Drugs@FDA, NDC
-- Inspection, citations, compliance action signals
-- LLM-friendly output with stable tool contracts
+Use the same hosted endpoint:
 
-## Discovery notes
+- URL: `https://www.regdatalab.com/mcp`
+- Auth header: `Authorization: Bearer YOUR_API_KEY`
 
-This repository is intentionally lightweight and points to the canonical docs on **regdatalab.com**. For AI crawler discoverability, use:
+## Example Prompts
 
-- `https://www.regdatalab.com/robots.txt`
-- `https://www.regdatalab.com/llms.txt`
-- `https://www.regdatalab.com/llms-full.txt`
+- `Give me a manufacturing risk summary for Pfizer.`
+- `Show recent VAI and OAI inspections for Moderna.`
+- `Summarize recalls, compliance actions, and import refusals for Thermo Fisher.`
+- `What does FDA have on this company across facilities, inspections, and enforcement?`
 
-## Main product repository
+## Data Coverage
 
-- `medley/fda-data` (private): core server, ingestion, and web app
+FDA Data MCP covers live hosted access to datasets including:
 
----
+- FDA inspections
+- FDA citations
+- FDA compliance actions
+- FDA import refusals
+- recalls and enforcement
+- 510(k) clearances
+- PMA approvals
+- Drugs@FDA
+- NDC directory
+- drug labels
+- device registrations and listings
+- device UDI
+- drug shortages
 
-If you find outdated examples using old Heroku URLs, replace with:
+For the canonical and current product surface, use:
 
-`https://www.regdatalab.com/mcp`
+- [Docs](https://www.regdatalab.com/docs)
+- [API page](https://www.regdatalab.com/api)
+
+## Auth and Pricing
+
+- Sign up for an API key at [regdatalab.com/signup](https://www.regdatalab.com/signup)
+- Pass the key in the `Authorization: Bearer YOUR_API_KEY` header
+- Free and paid plans are listed at [regdatalab.com/pricing](https://www.regdatalab.com/pricing)
+
+## Why This Repo Exists
+
+This repo is intentionally public and lightweight so it can serve as:
+
+- the GitHub landing page for the hosted MCP
+- a stable place for setup examples
+- a future home for marketplace metadata and install helpers
+
+The production backend and ingestion engine live separately.
+
+## Support
+
+- Docs: [regdatalab.com/docs](https://www.regdatalab.com/docs)
+- Connect: [regdatalab.com/connect.md](https://www.regdatalab.com/connect.md)
+- Email: [hello@regdatalab.com](mailto:hello@regdatalab.com)
+
+## Security
+
+If you find a security issue, do not open a public issue. Use the policy in [SECURITY.md](./SECURITY.md).

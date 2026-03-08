@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: RegDataLab Docs
+    url: https://www.regdatalab.com/docs
+    about: Read the canonical product and setup docs.
+  - name: MCP Connect Guide
+    url: https://www.regdatalab.com/connect.md
+    about: Start here for MCP client setup.
+  - name: Support
+    url: mailto:hello@regdatalab.com
+    about: Use email for billing, account, auth, or private support requests.
