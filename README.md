@@ -8,6 +8,8 @@ This is the public install and discovery repo for **FDA Data MCP**. The live MCP
 [![Connect Guide](https://img.shields.io/badge/docs-connect.md-0369a1?style=flat-square)](https://www.regdatalab.com/connect.md)
 [![GitHub Pages](https://github.com/medley/fda-data-mcp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/medley/fda-data-mcp/actions/workflows/pages/pages-build-deployment)
 
+![FDA Data MCP homepage screenshot](./assets/fda-data-mcp-homepage.png)
+
 ## Quick Links
 
 - Website: [regdatalab.com](https://www.regdatalab.com)
@@ -16,6 +18,8 @@ This is the public install and discovery repo for **FDA Data MCP**. The live MCP
 - Product docs: [regdatalab.com/docs](https://www.regdatalab.com/docs)
 - Pricing: [regdatalab.com/pricing](https://www.regdatalab.com/pricing)
 - Signup: [regdatalab.com/signup](https://www.regdatalab.com/signup)
+- Changelog: [CHANGELOG.md](./CHANGELOG.md)
+- Releases: [github.com/medley/fda-data-mcp/releases](https://github.com/medley/fda-data-mcp/releases)
 
 ## What It Does
 
@@ -118,6 +122,11 @@ The production backend and ingestion engine live separately.
 - Docs: [regdatalab.com/docs](https://www.regdatalab.com/docs)
 - Connect: [regdatalab.com/connect.md](https://www.regdatalab.com/connect.md)
 - Email: [hello@regdatalab.com](mailto:hello@regdatalab.com)
+
+## Changelog and Releases
+
+- Version history lives in [CHANGELOG.md](./CHANGELOG.md)
+- Public release notes live on the [GitHub releases page](https://github.com/medley/fda-data-mcp/releases)
 
 ## Security
 
