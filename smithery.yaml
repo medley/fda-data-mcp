@@ -16,12 +16,9 @@ startCommand:
       command: 'npx',
       args: [
         '-y',
-        'mcp-remote',
-        'https://www.regdatalab.com/mcp',
-        '--transport',
-        'http-only',
-        '--header',
-        `Authorization: Bearer ${config.apiKey}`
+        'fda-data-mcp'
       ],
-      env: {}
+      env: {
+        FDA_DATA_API_KEY: config.apiKey
+      }
     })

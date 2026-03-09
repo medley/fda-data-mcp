@@ -15,6 +15,7 @@ This is the public install and discovery repo for **FDA Data MCP**. The live MCP
 
 - Website: [regdatalab.com](https://www.regdatalab.com)
 - MCP endpoint: `https://www.regdatalab.com/mcp`
+- Discovery metadata: [`https://www.regdatalab.com/.well-known/mcp.json`](https://www.regdatalab.com/.well-known/mcp.json)
 - Connect guide: [regdatalab.com/connect.md](https://www.regdatalab.com/connect.md)
 - Product docs: [regdatalab.com/docs](https://www.regdatalab.com/docs)
 - Pricing: [regdatalab.com/pricing](https://www.regdatalab.com/pricing)
@@ -37,15 +38,23 @@ The strongest current use case is **manufacturing and compliance intelligence** 
 
 ## Quick Start
 
-### Hosted HTTP Setup
+### Claude Desktop / Cowork
 
 ```bash
-claude mcp add fda-data https://www.regdatalab.com/mcp --transport http --header "Authorization: Bearer YOUR_API_KEY"
+FDA_DATA_API_KEY=YOUR_API_KEY npx -y fda-data-mcp
 ```
 
-This is still the canonical setup path today for clients that support remote MCP over HTTP directly.
+This is the best default path today for:
 
-### Claude Desktop / Cursor / Windsurf
+- Claude Desktop
+- Cowork
+- Cursor
+- Windsurf
+- other stdio MCP clients
+
+Cowork uses the MCPs you already connected in Claude Desktop, so if Desktop is configured, Cowork can use the same FDA Data MCP connection.
+
+### Claude Desktop config
 
 Add this to your MCP config:
 
@@ -53,31 +62,45 @@ Add this to your MCP config:
 {
   "mcpServers": {
     "fda-data": {
-      "url": "https://www.regdatalab.com/mcp",
-      "headers": {
-        "Authorization": "Bearer YOUR_API_KEY"
+      "command": "npx",
+      "args": ["-y", "fda-data-mcp"],
+      "env": {
+        "FDA_DATA_API_KEY": "YOUR_API_KEY"
       }
     }
   }
 }
 ```
 
-### OpenAI / Generic MCP Clients
+### Claude Code / native remote HTTP
 
-Use the same hosted endpoint:
+```bash
+claude mcp add fda-data https://www.regdatalab.com/mcp --transport http --header "Authorization: Bearer YOUR_API_KEY"
+```
+
+Use this when you want the hosted MCP directly instead of the wrapper.
+
+### OpenAI / generic MCP clients
 
 - URL: `https://www.regdatalab.com/mcp`
 - Auth header: `Authorization: Bearer YOUR_API_KEY`
+- Discovery file: `https://www.regdatalab.com/.well-known/mcp.json`
 
 ### VS Code One-Click Install
 
-[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=fda-data-mcp&inputs=%5B%7B%22password%22%3Atrue%2C%22id%22%3A%22fda-data-auth-header%22%2C%22type%22%3A%22promptString%22%2C%22description%22%3A%22FDA%20Data%20MCP%20Authorization%20header%20%28Bearer%20YOUR_API_KEY%29%22%7D%5D&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22mcp-remote%22%2C%22https%3A//www.regdatalab.com/mcp%22%2C%22--transport%22%2C%22http-only%22%2C%22--header%22%2C%22Authorization%3A%24%7Binput%3Afda-data-auth-header%7D%22%5D%2C%22env%22%3A%7B%7D%7D)
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=fda-data-mcp&inputs=%5B%7B%22password%22%3Atrue%2C%22id%22%3A%22fda-data-api-key%22%2C%22type%22%3A%22promptString%22%2C%22description%22%3A%22FDA%20Data%20MCP%20API%20key%20%28from%20regdatalab.com/signup%29%22%7D%5D&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22fda-data-mcp%22%5D%2C%22env%22%3A%7B%22FDA_DATA_API_KEY%22%3A%22%24%7Binput%3Afda-data-api-key%7D%22%7D%7D)
 
-This uses the existing `mcp-remote` install pattern so users can connect to the hosted FDA Data MCP endpoint without running the private backend locally.
+This uses the hosted MCP endpoint without running the private backend locally.
 
 ## Thin npm Wrapper
 
-This repo now includes a thin stdio wrapper around `mcp-remote`:
+The public wrapper is already published on npm:
+
+```bash
+FDA_DATA_API_KEY=YOUR_API_KEY npx -y fda-data-mcp
+```
+
+It is a thin stdio wrapper around `mcp-remote`:
 
 - source: [`bin/fda-data-mcp.js`](./bin/fda-data-mcp.js)
 - config helper: [`lib/wrapper-config.js`](./lib/wrapper-config.js)
@@ -89,13 +112,10 @@ Local example from a cloned repo:
 FDA_DATA_API_KEY=YOUR_API_KEY node bin/fda-data-mcp.js
 ```
 
-Planned public install command after the first npm publish:
+If you do not have an API key yet, sign up here:
 
-```bash
-FDA_DATA_API_KEY=YOUR_API_KEY npx -y fda-data-mcp
-```
-
-The wrapper is ready in the repo now, but it is not published to npm yet. Until that first publish happens, the hosted HTTP setup above remains the public install path.
+- [regdatalab.com/signup](https://www.regdatalab.com/signup)
+- includes **300 free credits/month**
 
 ## Example Prompts
 
@@ -131,6 +151,7 @@ For the canonical and current product surface, use:
 
 - Sign up for an API key at [regdatalab.com/signup](https://www.regdatalab.com/signup)
 - Pass the key in the `Authorization: Bearer YOUR_API_KEY` header
+- Or set `FDA_DATA_API_KEY=YOUR_API_KEY` when using the wrapper
 - Free and paid plans are listed at [regdatalab.com/pricing](https://www.regdatalab.com/pricing)
 
 ## Why This Repo Exists

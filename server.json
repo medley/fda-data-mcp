@@ -3,7 +3,7 @@
   "name": "io.github.medley/fda-data-mcp",
   "title": "FDA Data MCP",
   "description": "Hosted MCP for FDA regulatory, manufacturing, and compliance intelligence.",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "websiteUrl": "https://www.regdatalab.com",
   "repository": {
     "id": "1155954101",
