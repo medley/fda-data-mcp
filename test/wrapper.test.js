@@ -47,8 +47,10 @@ test('buildRemoteArgs appends extra passthrough arguments', () => {
 });
 
 test('buildAuthHeader throws when no auth env is present', () => {
-  assert.throws(
-    () => buildAuthHeader({}),
-    /FDA_DATA_API_KEY/
-  );
+  assert.throws(() => buildAuthHeader({}), (error) => {
+    assert.match(error.message, /FDA_DATA_API_KEY/);
+    assert.match(error.message, /regdatalab\.com\/signup/);
+    assert.match(error.message, /300 free credits\/month/);
+    return true;
+  });
 });

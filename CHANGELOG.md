@@ -4,18 +4,22 @@ All notable changes to this repo will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this repo uses a simple `vMAJOR.MINOR.PATCH` versioning scheme for public releases.
 
-## [Unreleased]
+## [v0.3.0] - 2026-03-08
 
 ### Added
 
+- Wrapper-first setup guidance for Claude Desktop, Cowork, Cursor, Windsurf, and other stdio MCP clients.
+- Clear signup messaging in the npm wrapper when `FDA_DATA_API_KEY` is missing, including the free-tier link and credits.
+- Discovery metadata link in the public README so agents can find `/.well-known/mcp.json` quickly.
 - Publish-ready `fda-data-mcp` npm wrapper package built on top of `mcp-remote`.
 - Wrapper entrypoint and config helpers for stdio clients that need a local command instead of direct remote HTTP.
 - A dedicated GitHub social preview image asset for repo sharing.
 
 ### Changed
 
-- Added a release badge and wrapper-package links to the README.
-- Removed internal `docs/plans` files from the public repo surface to keep the repo marketplace-facing.
+- Made the wrapper the default setup path in the README instead of direct HTTP.
+- Updated the VS Code install button and Smithery metadata to use `fda-data-mcp` directly.
+- Removed stale README copy that still claimed the npm package had not been published.
 
 ## [v0.1.0] - 2026-03-08
 

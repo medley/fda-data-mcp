@@ -16,8 +16,17 @@ Usage:
 Optional:
   FDA_DATA_AUTH_HEADER="Authorization: Bearer your_key" npx -y fda-data-mcp
 
+Best for:
+  Claude Desktop / Cowork
+  Cursor / Windsurf
+  Other stdio MCP clients
+
 This wrapper proxies stdio clients to:
   https://www.regdatalab.com/mcp
+
+Get a free API key:
+  https://www.regdatalab.com/signup
+  Includes 300 free credits/month.
 `.trim());
   process.exit(0);
 }
