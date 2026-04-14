@@ -100,10 +100,10 @@ The public wrapper is already published on npm:
 FDA_DATA_API_KEY=YOUR_API_KEY npx -y fda-data-mcp
 ```
 
-It is a thin stdio wrapper around `mcp-remote`:
+It is a zero-dependency stdio-to-HTTP proxy:
 
 - source: [`bin/fda-data-mcp.js`](./bin/fda-data-mcp.js)
-- config helper: [`lib/wrapper-config.js`](./lib/wrapper-config.js)
+- proxy: [`lib/stdio-proxy.js`](./lib/stdio-proxy.js)
 - package metadata: [`package.json`](./package.json)
 
 Local example from a cloned repo:

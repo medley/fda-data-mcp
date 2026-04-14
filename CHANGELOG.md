@@ -4,6 +4,17 @@ All notable changes to this repo will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this repo uses a simple `vMAJOR.MINOR.PATCH` versioning scheme for public releases.
 
+## [v0.4.0] - 2026-04-14
+
+### Fixed
+
+- Replaced `mcp-remote` with a zero-dependency stdio-to-HTTP proxy. `mcp-remote@0.1.38` tried OAuth discovery and dynamic client registration before connecting, which crashed against servers using simple Bearer token auth. Every user who tried `npx -y fda-data-mcp` got a `ServerError` from `registerClient` and could not connect.
+
+### Changed
+
+- Removed `mcp-remote` dependency entirely. The wrapper is now ~150 lines of pure Node.js with zero npm dependencies.
+- Bumped minimum Node.js version to 18 (for native `fetch`).
+
 ## [v0.3.0] - 2026-03-08
 
 ### Added
