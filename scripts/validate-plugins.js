@@ -18,7 +18,7 @@ const SECRET_PATTERNS = [
   /rdl_(at|rt|ac)_[A-Za-z0-9_-]{10,}/, // OAuth tokens/codes
   /sk_(live|test)_[A-Za-z0-9]{10,}/,
   /apiKey=/i,
-  /Bearer\s+[A-Za-z0-9._-]{12,}/,
+  /Bearer\s+(?!YOUR_)[A-Za-z0-9._-]{12,}/, // documented placeholders like YOUR_API_KEY are fine
 ];
 const MAX_TEXT_BYTES = 256 * 1024;
 const MAX_FILES = 512;
@@ -170,15 +170,18 @@ function validatePlugin(pluginDir, connectorTools) {
     if (/\.(png|jpe?g|gif|webp)$/i.test(name)) continue;
     const stat = fs.statSync(full);
     if (stat.size > MAX_TEXT_BYTES) errors.push(`${rel(full)}: ${stat.size} bytes > 256 KiB`);
-    const text = fs.readFileSync(full, 'utf8');
-    for (const marker of FORBIDDEN_MARKERS) {
-      if (marker.test(text)) errors.push(`${rel(full)}: references the owner-operations surface (${marker}); the public plugin is research-only`);
-    }
-    for (const pattern of SECRET_PATTERNS) {
-      if (pattern.test(text)) errors.push(`${rel(full)}: looks like it contains a credential (${pattern})`);
-    }
+    scanText(fs.readFileSync(full, 'utf8'), rel(full), errors);
   }
   return errors;
+}
+
+function scanText(text, label, errors) {
+  for (const marker of FORBIDDEN_MARKERS) {
+    if (marker.test(text)) errors.push(`${label}: references the owner-operations surface (${marker}); the public plugin is research-only`);
+  }
+  for (const pattern of SECRET_PATTERNS) {
+    if (pattern.test(text)) errors.push(`${label}: looks like it contains a credential (${pattern})`);
+  }
 }
 
 function validateRepo(root) {
@@ -187,6 +190,10 @@ function validateRepo(root) {
   const toolList = connectorTools ? connectorTools.tools : null;
   const claudeMarket = readJson(path.join(root, '.claude-plugin', 'marketplace.json'), errors);
   const openaiMarket = readJson(path.join(root, '.agents', 'plugins', 'marketplace.json'), errors);
+  for (const file of [path.join('.claude-plugin', 'marketplace.json'), path.join('.agents', 'plugins', 'marketplace.json')]) {
+    const full = path.join(root, file);
+    if (fs.existsSync(full)) scanText(fs.readFileSync(full, 'utf8'), file, errors);
+  }
   const pluginDirs = new Set();
   for (const entry of (claudeMarket && claudeMarket.plugins) || []) {
     const dir = path.join(root, entry.source);

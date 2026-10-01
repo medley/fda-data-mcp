@@ -60,8 +60,21 @@ test('rejects a credential baked into the MCP config', () => {
 test('rejects owner-operations references and auth keys in the public package', () => {
   expectProblem((dir) => fs.appendFileSync(path.join(dir, PLUGIN, 'skills/company-compliance-profile/SKILL.md'), '\nCall regdatalab_owner_snapshot.\n'), /owner-operations/);
   expectProblem((dir) => fs.appendFileSync(path.join(dir, PLUGIN, 'README.md'), '\nScope ops:read.\n'), /owner-operations/);
+  expectProblem((dir) => fs.appendFileSync(path.join(dir, PLUGIN, 'README.md'), '\nOwner URL https://www.regdatalab.com/mcp/owner\n'), /owner-operations/);
+  expectProblem((dir) => editJson(path.join(dir, '.claude-plugin/marketplace.json'), (d) => { d.description = 'also /mcp/owner'; }), /marketplace\.json: references the owner-operations/);
+  expectProblem((dir) => editJson(path.join(dir, '.agents/plugins/marketplace.json'), (d) => { d.note = 'Bearer fda_Abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG'; }), /marketplace\.json: looks like it contains a credential/);
   expectProblem((dir) => editJson(path.join(dir, PLUGIN, '.mcp.json'), (d) => { d.mcpServers.regdatalab.oauth = { scopes: ['ops:read'] }; }), /key "oauth" not allowed/);
   expectProblem((dir) => editJson(path.join(dir, PLUGIN, 'mcp.json'), (d) => { d.mcpServers.regdatalab.scopes = ['fda:read']; }), /key "scopes" not allowed/);
+});
+
+test('allows documented key placeholders in plugin text', () => {
+  const dir = scratchRepo();
+  try {
+    fs.appendFileSync(path.join(dir, PLUGIN, 'README.md'), '\nClaude Code: --header "Authorization: Bearer YOUR_API_KEY"\n');
+    assert.deepEqual(validateRepo(dir), []);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('rejects a non-https or wrong endpoint', () => {
