@@ -1,0 +1,16 @@
+{
+  "name": "regdatalab",
+  "owner": { "name": "RegDataLab", "url": "https://www.regdatalab.com" },
+  "metadata": {
+    "description": "RegDataLab plugins for FDA regulatory and manufacturing research."
+  },
+  "plugins": [
+    {
+      "name": "regdatalab",
+      "source": "./plugins/regdatalab",
+      "description": "Cited FDA manufacturing, inspection, warning-letter, recall and product research via the hosted RegDataLab MCP server.",
+      "version": "0.1.0",
+      "category": "research"
+    }
+  ]
+}

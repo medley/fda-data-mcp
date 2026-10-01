@@ -175,6 +175,18 @@ If you do not have an API key yet, sign up here:
 - [regdatalab.com/signup](https://www.regdatalab.com/signup)
 - includes **300 free credits/month**
 
+## Plugins for Claude and ChatGPT (preview)
+
+[`plugins/regdatalab`](./plugins/regdatalab) packages the hosted server with five
+research workflows (company compliance profile, facility due diligence, recall
+research, supplier risk screen, product lookup) for Claude (claude.ai, Desktop,
+Cowork, Claude Code) and ChatGPT plugins. Users sign in with their RegDataLab
+account through OAuth instead of pasting a key into a URL.
+
+OAuth sign-in for hosted Claude/ChatGPT is not switched on yet; until then use
+the API-key setups above. See [install and test](./docs/plugins/INSTALL-AND-TEST.md)
+and the [marketplace readiness checklist](./docs/plugins/SUBMISSION-CHECKLIST.md).
+
 ## Example Prompts
 
 - `Give me a manufacturing risk summary for Pfizer.`

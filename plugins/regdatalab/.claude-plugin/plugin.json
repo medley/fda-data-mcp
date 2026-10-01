@@ -1,0 +1,11 @@
+{
+  "name": "regdatalab",
+  "displayName": "RegDataLab FDA Research",
+  "version": "0.1.0",
+  "description": "Research FDA manufacturing, inspection, warning-letter, recall and product records for any company or facility, with cited FDA record identifiers. Uses the hosted RegDataLab MCP server (sign in with your RegDataLab account).",
+  "author": { "name": "RegDataLab", "url": "https://www.regdatalab.com" },
+  "homepage": "https://www.regdatalab.com",
+  "repository": "https://github.com/medley/fda-data-mcp",
+  "license": "MIT",
+  "keywords": ["fda", "regulatory", "compliance", "manufacturing", "inspections", "recalls", "warning-letters"]
+}

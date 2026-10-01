@@ -4,6 +4,15 @@ All notable changes to this repo will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this repo uses a simple `vMAJOR.MINOR.PATCH` versioning scheme for public releases.
 
+## [Unreleased]
+
+### Added
+
+- `plugins/regdatalab`: one plugin folder for Claude (`.claude-plugin/plugin.json`, `.mcp.json`) and ChatGPT/Codex (`plugin.json`, `mcp.json`, `.app.json`) with five read-only FDA research skills, pointing at the hosted endpoint and signing users in with OAuth (no keys in the package).
+- Marketplaces: `.claude-plugin/marketplace.json` (Claude) and `.agents/plugins/marketplace.json` (Codex/ChatGPT).
+- `scripts/validate-plugins.js` and `test/plugins.test.js`: offline checks for both platforms' packaging rules, including negative cases.
+- `docs/plugins/`: install/test guide and marketplace readiness checklist.
+
 ## [v0.4.0] - 2026-04-14
 
 ### Fixed
