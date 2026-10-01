@@ -13,7 +13,7 @@ Uses the RegDataLab connector. Calls use the user's RegDataLab credits.
    - By company or classification and date range: `fda_search_enforcement` (`company`, `classification`, `from_date`, `to_date`, `status`).
    - By free-text reason or product wording: `fda_search_recall_text`.
    - Devices specifically: `fda_device_recalls`.
-   - Additional recall-event detail: `fda_ires_enforcement`.
+   - FDA enforcement-report (iRES) entries with event classification, product codes and quantities, or a lookup by recall number: `fda_ires_enforcement`.
 2. **Trace to a facility** when the user asks where a product was made: `fda_recall_facility_trace` with the `recall_number` (preferred) or `firm` + `product`. Report its confidence level as given; a trace is a candidate match, not a confirmation.
 3. **Summarize.** Group by classification and year; call out Class I events first.
 
@@ -22,4 +22,5 @@ Uses the RegDataLab connector. Calls use the user's RegDataLab credits.
 - Counts by classification and year, then the notable recalls.
 - For each recall cited: recall number, classification, report date, status, product description (short) and reason.
 - Facility traces: FEI, match method and confidence exactly as returned.
-- State limits: enforcement data reflects FDA's published reports; product descriptions are abbreviated; traces are probabilistic. Not legal or regulatory advice.
+- Note the data `as_of` date.
+- State limits: enforcement data reflects FDA's published reports; product descriptions are abbreviated; traces are probabilistic. Absence of a record is not a clean bill of health: "no recalls found" can mean none were reported, the firm name differs, or the report is not yet published. Not legal or regulatory advice.
