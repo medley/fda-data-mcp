@@ -105,4 +105,4 @@ dates, with an `as_of` date.
 | "That API key wasn't accepted" | Wrong, inactive or expired key; the public demo key is not accepted. Get a free key at regdatalab.com/signup. |
 | "No credits remaining" | Account credits are used up; they reset monthly or upgrade at regdatalab.com/pricing. |
 | A curation tool says it is unavailable | Connector access is read-only by design. |
-| Too many attempts | 10 wrong keys from one network in 15 minutes locks sign-in for 15 minutes. |
+| "This sign-in link has expired" | The sign-in attempt timed out (15 minutes) or had 5 wrong keys; start the connection again from the app. |
