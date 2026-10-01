@@ -10,6 +10,9 @@ const path = require('node:path');
 
 const HOSTED_MCP_URL = 'https://www.regdatalab.com/mcp';
 const WRITE_TOOLS = ['fda_save_aliases', 'fda_link_subsidiaries'];
+// Owner-operations surface: never part of the public research plugin.
+const FORBIDDEN_MARKERS = [/regdatalab_owner_snapshot/, /\bops:read\b/, /\/mcp\/owner\b/];
+const FORBIDDEN_SERVER_KEYS = ['headers', 'command', 'env', 'oauth', 'scopes', 'scope', 'auth', 'authorization'];
 const SECRET_PATTERNS = [
   /\bfda_(?=[A-Za-z0-9_-]*[A-Z0-9])[A-Za-z0-9_-]{40,}/, // RegDataLab API key (43 random base64url chars; tool names are lowercase)
   /rdl_(at|rt|ac)_[A-Za-z0-9_-]{10,}/, // OAuth tokens/codes
@@ -82,7 +85,9 @@ function validatePlugin(pluginDir, connectorTools) {
     for (const [name, server] of servers) {
       if (server.type !== 'http') errors.push(`.mcp.json ${name}: type must be "http"`);
       if (server.url !== HOSTED_MCP_URL) errors.push(`.mcp.json ${name}: url must be ${HOSTED_MCP_URL}`);
-      if (server.headers || server.command || server.env) errors.push(`.mcp.json ${name}: no headers/command/env (credentials come from OAuth)`);
+      for (const k of FORBIDDEN_SERVER_KEYS) {
+        if (Object.prototype.hasOwnProperty.call(server, k)) errors.push(`.mcp.json ${name}: key "${k}" not allowed (credentials come from the platform's OAuth flow)`);
+      }
     }
   }
 
@@ -124,7 +129,9 @@ function validatePlugin(pluginDir, connectorTools) {
     for (const [name, server] of servers) {
       if (server.type !== 'streamable-http') errors.push(`mcp.json ${name}: type must be "streamable-http"`);
       if (server.url !== HOSTED_MCP_URL) errors.push(`mcp.json ${name}: url must be ${HOSTED_MCP_URL}`);
-      if (server.headers || server.command || server.env) errors.push(`mcp.json ${name}: no headers/command/env`);
+      for (const k of FORBIDDEN_SERVER_KEYS) {
+        if (Object.prototype.hasOwnProperty.call(server, k)) errors.push(`mcp.json ${name}: key "${k}" not allowed`);
+      }
     }
   }
 
@@ -164,6 +171,9 @@ function validatePlugin(pluginDir, connectorTools) {
     const stat = fs.statSync(full);
     if (stat.size > MAX_TEXT_BYTES) errors.push(`${rel(full)}: ${stat.size} bytes > 256 KiB`);
     const text = fs.readFileSync(full, 'utf8');
+    for (const marker of FORBIDDEN_MARKERS) {
+      if (marker.test(text)) errors.push(`${rel(full)}: references the owner-operations surface (${marker}); the public plugin is research-only`);
+    }
     for (const pattern of SECRET_PATTERNS) {
       if (pattern.test(text)) errors.push(`${rel(full)}: looks like it contains a credential (${pattern})`);
     }
