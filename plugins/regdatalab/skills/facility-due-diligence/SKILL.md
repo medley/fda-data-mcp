@@ -23,4 +23,5 @@ Uses the RegDataLab connector. Calls use the user's RegDataLab credits.
 - One-paragraph risk read: last inspection date and outcome, any OAI in the last 5 years, open warning letters, import alerts.
 - A dated evidence list; every line cites FEI plus the record's own identifier and date (inspection end date, CFR section, MARCS-CMS number, refusal or recall number).
 - Note the data `as_of` date and that FDA publishes some records with a delay.
+- Absence of a record is not a clean bill of health: "no OAI or warning letter found" can mean the site was not inspected, the record is not yet published, or it sits under another FEI. Say which records were checked.
 - Do not infer causes or quality-system maturity beyond what the records state. Not legal or regulatory advice.

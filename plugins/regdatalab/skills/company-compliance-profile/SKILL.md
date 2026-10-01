@@ -1,6 +1,6 @@
 ---
 name: company-compliance-profile
-description: Build a cited FDA manufacturing and compliance profile of a company. Use when the user asks about a company's FDA record, inspection history, warning letters, 483 observations, recalls, compliance risk, or wants a pre-meeting or due-diligence brief on a pharma, biotech, medtech or food manufacturer.
+description: Build a cited FDA manufacturing and compliance profile of a company. Use when the user asks about a company's FDA record, inspection history, warning letters, 483 observations, recalls, compliance risk, or wants a pre-meeting or due-diligence brief on a single pharma, biotech, medtech or food manufacturer. For one site or FEI use facility-due-diligence; for several companies use supplier-risk-screen; for recall-only questions use recall-and-enforcement-research.
 ---
 
 # Company FDA compliance profile

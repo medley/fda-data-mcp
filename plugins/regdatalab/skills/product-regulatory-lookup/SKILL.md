@@ -25,5 +25,7 @@ Uses the RegDataLab connector. Calls use the user's RegDataLab credits.
 ## Output
 
 - Answer the question directly, then list the records: identifier (K/P/NDA/ANDA/BLA number, NDC, product code), applicant or labeler, decision or approval date, and status.
+- Cite every claim with the record's identifier and date as returned.
 - If several records match, show the most relevant few and say how many more exist.
+- Absence of a record is not a clean bill of health: "no 510(k) found" can mean the device is exempt, cleared under another name or applicant, or not yet published.
 - Note the data `as_of` date. Regulatory status can change after publication; for clinical or compliance decisions, the user should confirm with the FDA source. Not legal or regulatory advice.
