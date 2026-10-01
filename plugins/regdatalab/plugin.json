@@ -1,0 +1,30 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "regdatalab",
+  "version": "0.1.0",
+  "description": "Research FDA manufacturing, inspection, warning-letter, recall and product records for any company or facility, with cited FDA record identifiers.",
+  "extensions": {
+    "com.openai": {
+      "apps": "./.app.json",
+      "interface": {
+        "displayName": "RegDataLab FDA Research",
+        "shortDescription": "FDA compliance research",
+        "longDescription": "Ask about a company's or facility's FDA record and get a cited answer: registered manufacturing sites, inspection outcomes (NAI/VAI/OAI), Form 483 citations, warning letters, import alerts and refusals, debarments, recalls and enforcement, plus 510(k), PMA, Drugs@FDA, NDC, UDI and drug-label lookups. RegDataLab cleans and links FDA public data so one company name resolves to its subsidiaries and facilities. Read-only research tools; each call uses credits from your RegDataLab account (free tier available). Not legal or regulatory advice.",
+        "developerName": "RegDataLab",
+        "category": "Research",
+        "capabilities": ["Read"],
+        "websiteURL": "https://www.regdatalab.com",
+        "privacyPolicyURL": "https://www.regdatalab.com/privacy",
+        "termsOfServiceURL": "https://www.regdatalab.com/terms",
+        "defaultPrompt": [
+          "Use RegDataLab to summarize Baxter's FDA manufacturing and compliance record, with citations.",
+          "Use RegDataLab to check whether a facility (by FEI number) has had OAI inspections or warning letters.",
+          "Use RegDataLab to list Class I recalls for infusion pumps in the last two years."
+        ],
+        "brandColor": "#0F172A",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}
