@@ -14,11 +14,11 @@ const WRITE_TOOLS = ['fda_save_aliases', 'fda_link_subsidiaries'];
 const FORBIDDEN_MARKERS = [/regdatalab_owner_snapshot/, /\bops:read\b/, /\/mcp\/owner\b/];
 const FORBIDDEN_SERVER_KEYS = ['headers', 'command', 'env', 'oauth', 'scopes', 'scope', 'auth', 'authorization'];
 const SECRET_PATTERNS = [
-  /\bfda_(?=[A-Za-z0-9_-]*[A-Z0-9])[A-Za-z0-9_-]{40,}/, // RegDataLab API key (43 random base64url chars; tool names are lowercase)
+  /(?<![A-Za-z0-9])fda_(?=[A-Za-z0-9_-]*[A-Z0-9])[A-Za-z0-9_-]{40,}/, // RegDataLab API key (43 random base64url chars; tool names are lowercase)
   /rdl_(at|rt|ac)_[A-Za-z0-9_-]{10,}/, // OAuth tokens/codes
   /sk_(live|test)_[A-Za-z0-9]{10,}/,
   /apiKey=/i,
-  /Bearer\s+(?!YOUR_)[A-Za-z0-9._-]{12,}/, // documented placeholders like YOUR_API_KEY are fine
+  /Bearer\s+(?!YOUR_[A-Z_]+(?![A-Za-z0-9.-]))[A-Za-z0-9._-]{12,}/, // a pure placeholder like YOUR_API_KEY is fine
 ];
 const MAX_TEXT_BYTES = 256 * 1024;
 const MAX_FILES = 512;
