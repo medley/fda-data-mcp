@@ -67,6 +67,11 @@ test('rejects owner-operations references and auth keys in the public package', 
   expectProblem((dir) => editJson(path.join(dir, PLUGIN, 'mcp.json'), (d) => { d.mcpServers.regdatalab.scopes = ['fda:read']; }), /key "scopes" not allowed/);
 });
 
+test('a placeholder prefix cannot hide a real key', () => {
+  expectProblem((dir) => fs.appendFileSync(path.join(dir, PLUGIN, 'README.md'), '\nBearer YOUR_fda_Abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG\n'), /credential/);
+  expectProblem((dir) => fs.appendFileSync(path.join(dir, PLUGIN, 'README.md'), '\nkey: X_fda_Abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG\n'), /credential/);
+});
+
 test('allows documented key placeholders in plugin text', () => {
   const dir = scratchRepo();
   try {
