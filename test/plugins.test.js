@@ -57,6 +57,13 @@ test('rejects a credential baked into the MCP config', () => {
   }), /url must be/);
 });
 
+test('rejects owner-operations references and auth keys in the public package', () => {
+  expectProblem((dir) => fs.appendFileSync(path.join(dir, PLUGIN, 'skills/company-compliance-profile/SKILL.md'), '\nCall regdatalab_owner_snapshot.\n'), /owner-operations/);
+  expectProblem((dir) => fs.appendFileSync(path.join(dir, PLUGIN, 'README.md'), '\nScope ops:read.\n'), /owner-operations/);
+  expectProblem((dir) => editJson(path.join(dir, PLUGIN, '.mcp.json'), (d) => { d.mcpServers.regdatalab.oauth = { scopes: ['ops:read'] }; }), /key "oauth" not allowed/);
+  expectProblem((dir) => editJson(path.join(dir, PLUGIN, 'mcp.json'), (d) => { d.mcpServers.regdatalab.scopes = ['fda:read']; }), /key "scopes" not allowed/);
+});
+
 test('rejects a non-https or wrong endpoint', () => {
   expectProblem((dir) => editJson(path.join(dir, PLUGIN, 'mcp.json'), (d) => {
     d.mcpServers.regdatalab.url = 'http://www.regdatalab.com/mcp';
