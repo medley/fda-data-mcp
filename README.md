@@ -40,13 +40,21 @@ The strongest current use case is **manufacturing and compliance intelligence** 
 
 ### Claude Desktop
 
-Add this to your Claude Desktop MCP config:
+Option 1: add it as a custom connector in **Settings > Connectors** with the URL
+`https://www.regdatalab.com/mcp` and sign in when prompted.
+
+Option 2: `claude_desktop_config.json` only starts local (stdio) servers, so use the
+wrapper there:
 
 ```json
 {
   "mcpServers": {
     "fda-data": {
-      "url": "https://www.regdatalab.com/mcp?apiKey=YOUR_API_KEY"
+      "command": "npx",
+      "args": ["-y", "fda-data-mcp"],
+      "env": {
+        "FDA_DATA_API_KEY": "YOUR_API_KEY"
+      }
     }
   }
 }
