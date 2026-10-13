@@ -5,6 +5,7 @@ const {
   HOSTED_MCP_URL,
   buildAuthHeader,
   parseSSE,
+  sendRequest,
 } = require('../lib/stdio-proxy.js');
 
 test('HOSTED_MCP_URL points to regdatalab', () => {
@@ -310,4 +311,83 @@ test('parseSSE handles CRLF and multi-line data fields', () => {
     parseSSE('event: message\r\ndata: {"a":1}\r\n\r\nevent: message\r\ndata: {"b":\r\ndata: 2}\r\n\r\n').map((m) => JSON.parse(m)),
     [{ a: 1 }, { b: 2 }],
   );
+});
+
+// --- sendRequest response-shape validation and redaction (mocked fetch) ---
+
+const SECRET = 'rdl_live_SYNTHETIC_TOKEN_123';
+const AUTH = `Authorization: Bearer ${SECRET}`;
+
+async function withFetch(status, text, headers, fn) {
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => new Response(text, { status, headers });
+  try {
+    return await fn();
+  } finally {
+    globalThis.fetch = original;
+  }
+}
+
+test('sendRequest answers a request when HTTP 200 has an empty body', async () => {
+  const result = await withFetch(200, '', { 'content-type': 'application/json' }, () =>
+    sendRequest({ jsonrpc: '2.0', id: 7, method: 'tools/list' }, null, AUTH));
+  assert.equal(result.messages.length, 1);
+  const msg = JSON.parse(result.messages[0]);
+  assert.equal(msg.id, 7);
+  assert.ok(msg.error);
+});
+
+test('sendRequest answers a request when HTTP 200 carries non-JSON-RPC JSON', async () => {
+  const result = await withFetch(200, '{"ok":true}', { 'content-type': 'application/json' }, () =>
+    sendRequest({ jsonrpc: '2.0', id: 'a', method: 'tools/list' }, null, AUTH));
+  const replies = result.messages.map((m) => JSON.parse(m)).filter((m) => m.id === 'a');
+  assert.equal(replies.length, 1);
+  assert.ok(replies[0].error);
+});
+
+test('sendRequest answers a request when an SSE stream has no reply for its id', async () => {
+  const sse = 'event: message\ndata: {"jsonrpc":"2.0","method":"notifications/progress","params":{}}\n\n';
+  const result = await withFetch(200, sse, { 'content-type': 'text/event-stream' }, () =>
+    sendRequest({ jsonrpc: '2.0', id: 3, method: 'tools/call' }, null, AUTH));
+  const replies = result.messages.map((m) => JSON.parse(m)).filter((m) => m.id === 3);
+  assert.equal(replies.length, 1);
+  assert.ok(replies[0].error);
+});
+
+test('sendRequest does not add an error when the server answered the request', async () => {
+  const result = await withFetch(200, '{"jsonrpc":"2.0","id":1,"result":{}}', { 'content-type': 'application/json' }, () =>
+    sendRequest({ jsonrpc: '2.0', id: 1, method: 'ping' }, null, AUTH));
+  assert.deepEqual(result.messages.map((m) => JSON.parse(m)), [{ jsonrpc: '2.0', id: 1, result: {} }]);
+});
+
+test('sendRequest redacts the token from HTTP 500 structured errors', async () => {
+  const body = JSON.stringify({ jsonrpc: '2.0', id: 9, error: { code: -32000, message: `bad header ${AUTH}` } });
+  const result = await withFetch(500, body, { 'content-type': 'application/json' }, () =>
+    sendRequest({ jsonrpc: '2.0', id: 9, method: 'tools/list' }, null, AUTH));
+  const joined = result.messages.join('\n');
+  assert.ok(!joined.includes(SECRET), joined);
+  assert.ok(joined.includes('[REDACTED]'));
+});
+
+test('sendRequest redacts the token from a non-matching HTTP 500 error message', async () => {
+  const body = JSON.stringify({ error: { message: `token ${SECRET} rejected` } });
+  const result = await withFetch(500, body, { 'content-type': 'application/json' }, () =>
+    sendRequest({ jsonrpc: '2.0', id: 2, method: 'tools/list' }, null, AUTH));
+  assert.ok(!result.messages.join('\n').includes(SECRET));
+});
+
+test('sendRequest redacts the token from notification failure logs', async () => {
+  const writes = [];
+  const originalWrite = process.stderr.write;
+  process.stderr.write = (chunk) => { writes.push(String(chunk)); return true; };
+  try {
+    const result = await withFetch(502, `upstream echoed ${AUTH}`, { 'content-type': 'text/plain' }, () =>
+      sendRequest({ jsonrpc: '2.0', method: 'notifications/initialized' }, null, AUTH));
+    assert.deepEqual(result.messages, []);
+  } finally {
+    process.stderr.write = originalWrite;
+  }
+  const logged = writes.join('');
+  assert.ok(logged.includes('Notification notifications/initialized failed'));
+  assert.ok(!logged.includes(SECRET), logged);
 });
