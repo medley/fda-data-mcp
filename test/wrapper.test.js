@@ -281,9 +281,14 @@ test('e2e', async (t) => {
 
   await t.test('oversized stdin message gets an error response; next message still works', async () => {
     const r = await run([initialize, callTool(1, 'echo', { pad: 'p'.repeat(1_100_000) }), callTool(2, 'echo')]);
-    assert.deepEqual(r.messages.map((m) => m.id), [0, 1, 2]);
-    assert.equal(r.messages[1].error.code, -32600);
-    assert.ok(r.messages[2].result);
+    // The oversized line is rejected synchronously while the others are still
+    // queued, so replies can arrive out of order (JSON-RPC allows that).
+    // Check each id instead of the order.
+    const byId = new Map(r.messages.map((m) => [m.id, m]));
+    assert.equal(r.messages.length, 3);
+    assert.ok(byId.get(0).result);
+    assert.equal(byId.get(1).error.code, -32600);
+    assert.ok(byId.get(2).result);
   });
 
   await t.test('responses keep request order even when an earlier call is slow', async () => {
@@ -390,4 +395,31 @@ test('sendRequest redacts the token from notification failure logs', async () =>
   const logged = writes.join('');
   assert.ok(logged.includes('Notification notifications/initialized failed'));
   assert.ok(!logged.includes(SECRET), logged);
+});
+
+test('sendRequest redacts a known mcp-session-id from forwarded messages', async () => {
+  const sessionId = 'sess-SYNTHETIC-0123456789';
+  const body = JSON.stringify({ jsonrpc: '2.0', id: 4, error: { code: -32000, message: `session ${sessionId} invalid` } });
+  const result = await withFetch(500, body, { 'content-type': 'application/json' }, () =>
+    sendRequest({ jsonrpc: '2.0', id: 4, method: 'tools/list' }, sessionId, AUTH));
+  const joined = result.messages.join('\n');
+  assert.ok(!joined.includes(sessionId), joined);
+  assert.ok(joined.includes('[REDACTED]'));
+});
+
+test('sendRequest redacts a newly issued session id echoed in the body and logs', async () => {
+  const newSession = 'sess-NEW-SYNTHETIC-987654321';
+  const writes = [];
+  const originalWrite = process.stderr.write;
+  process.stderr.write = (chunk) => { writes.push(String(chunk)); return true; };
+  let result;
+  try {
+    result = await withFetch(502, `bad gateway for ${newSession}`,
+      { 'content-type': 'text/plain', 'mcp-session-id': newSession }, () =>
+        sendRequest({ jsonrpc: '2.0', method: 'notifications/initialized' }, null, AUTH));
+  } finally {
+    process.stderr.write = originalWrite;
+  }
+  assert.equal(result.sessionId, newSession, 'the proxy still tracks the session internally');
+  assert.ok(!writes.join('').includes(newSession), writes.join(''));
 });
