@@ -4,6 +4,26 @@ All notable changes to this repo will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this repo uses a simple `vMAJOR.MINOR.PATCH` versioning scheme for public releases.
 
+## [Unreleased]
+
+### Changed
+
+- README setup now leads with OAuth sign-in and the `Authorization` header, and no longer shows API keys in URLs.
+- Support and security contact is `hello@runsales.ai`.
+
+## [v0.4.2] - merged 2026-10-13, not yet on npm
+
+### Fixed
+
+- The wrapper replies to every request, even when the server returns an empty or non-JSON-RPC body.
+- The API key and session ids are redacted on every output path, including SSE and notification errors.
+
+## [v0.4.1] - 2026-04-14 (current npm `latest`)
+
+### Fixed
+
+- Request timeout, request serialization, response buffer cap and header parsing in the stdio proxy.
+
 ## [v0.4.0] - 2026-04-14
 
 ### Fixed
