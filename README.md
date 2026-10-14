@@ -39,7 +39,7 @@ The strongest current use case is **manufacturing and compliance intelligence** 
 
 The hosted endpoint is `https://www.regdatalab.com/mcp`. Pick the first path your client supports:
 
-1. **OAuth sign-in** (claude.ai, Claude Desktop, ChatGPT developer mode, other OAuth-capable clients): add the bare URL and sign in. No key in your config.
+1. **OAuth sign-in** (claude.ai, Claude Desktop, ChatGPT custom MCP servers, other OAuth-capable clients): add the bare URL and sign in. No key in your config.
 2. **Authorization header** (Claude Code, Cursor, Windsurf, the OpenAI API, scripts): send `Authorization: Bearer YOUR_API_KEY`.
 3. **npx wrapper** (stdio-only clients such as `claude_desktop_config.json`): set `FDA_DATA_API_KEY`.
 
@@ -53,7 +53,7 @@ Never put an API key in a URL. URLs end up in server, proxy and browser logs. Th
 
 ### ChatGPT
 
-ChatGPT connects through OAuth sign-in to the same bare URL. Custom connectors currently require developer mode; follow the [connect guide](https://www.regdatalab.com/connect.md) for the current steps. RegDataLab is not yet listed in the ChatGPT app directory.
+Add RegDataLab manually as a custom MCP server: in ChatGPT, open **Plugins**, choose **+**, then **Add custom MCP server**, enter only `https://www.regdatalab.com/mcp` and sign in (OpenAI's older docs call this a custom connector under Apps). Availability depends on your ChatGPT plan and workspace settings; the [connect guide](https://www.regdatalab.com/connect.md) has the current steps. A RegDataLab directory listing has been submitted to OpenAI and is in review; it is not published, so it cannot be installed from the directory yet.
 
 ### Claude Code
 
