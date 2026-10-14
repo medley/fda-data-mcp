@@ -4,7 +4,7 @@ If you find a security issue related to the public install/config repo, the host
 
 Report security concerns to:
 
-- `hello@regdatalab.com`
+- `hello@runsales.ai`
 
 Please include:
 
