@@ -7,7 +7,6 @@ This is the public install and discovery repo for **FDA Data MCP**. The live MCP
 [![Website](https://img.shields.io/badge/website-regdatalab.com-0f172a?style=flat-square)](https://www.regdatalab.com)
 [![Connect Guide](https://img.shields.io/badge/docs-connect.md-0369a1?style=flat-square)](https://www.regdatalab.com/connect.md)
 [![Release](https://img.shields.io/github/v/release/medley/fda-data-mcp?display_name=tag&style=flat-square)](https://github.com/medley/fda-data-mcp/releases)
-[![GitHub Pages](https://github.com/medley/fda-data-mcp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/medley/fda-data-mcp/actions/workflows/pages/pages-build-deployment)
 
 ![FDA Data MCP homepage screenshot](./assets/fda-data-mcp-homepage.png)
 
@@ -38,13 +37,98 @@ The strongest current use case is **manufacturing and compliance intelligence** 
 
 ## Quick Start
 
-### Claude Desktop
+The hosted endpoint is `https://www.regdatalab.com/mcp`. Pick the first path your client supports:
 
-Option 1: add it as a custom connector in **Settings > Connectors** with the URL
-`https://www.regdatalab.com/mcp` and sign in when prompted.
+1. **OAuth sign-in** (claude.ai, Claude Desktop, ChatGPT custom MCP servers, other OAuth-capable clients): add the bare URL and sign in. No key in your config.
+2. **Authorization header** (Claude Code, Cursor, Windsurf, the OpenAI API, scripts): send `Authorization: Bearer YOUR_API_KEY`.
+3. **npx wrapper** (stdio-only clients such as `claude_desktop_config.json`): set `FDA_DATA_API_KEY`.
 
-Option 2: `claude_desktop_config.json` only starts local (stdio) servers, so use the
-wrapper there:
+Never put an API key in a URL. URLs end up in server, proxy and browser logs. The canonical, current client steps are in the [connect guide](https://www.regdatalab.com/connect.md).
+
+### claude.ai, Claude Desktop and Claude Cowork
+
+1. Open **Settings > Connectors** and add a custom connector.
+2. Enter only `https://www.regdatalab.com/mcp`.
+3. Choose sign in, paste your RegDataLab API key on the RegDataLab consent page and approve read-only access.
+
+### ChatGPT
+
+Add RegDataLab manually as a custom MCP server: in ChatGPT, open **Plugins**, choose **+**, then **Add custom MCP server**, enter only `https://www.regdatalab.com/mcp` and sign in (OpenAI's older docs call this a custom connector under Apps). Availability depends on your ChatGPT plan and workspace settings; the [connect guide](https://www.regdatalab.com/connect.md) has the current steps. A RegDataLab directory listing has been submitted to OpenAI and is in review; it is not published, so it cannot be installed from the directory yet.
+
+### Claude Code
+
+```bash
+claude mcp add fda-data https://www.regdatalab.com/mcp \
+  --transport http \
+  --header "Authorization: Bearer YOUR_API_KEY" \
+  --scope user
+```
+
+Verify with `/mcp`. You should see `fda-data` and the manufacturing-first toolset.
+
+### Cursor
+
+Add to `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project you do not commit):
+
+```json
+{
+  "mcpServers": {
+    "fda-data": {
+      "url": "https://www.regdatalab.com/mcp",
+      "headers": { "Authorization": "Bearer YOUR_API_KEY" }
+    }
+  }
+}
+```
+
+### Windsurf
+
+Add to `~/.codeium/windsurf/mcp_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "fda-data": {
+      "serverUrl": "https://www.regdatalab.com/mcp",
+      "headers": { "Authorization": "Bearer YOUR_API_KEY" }
+    }
+  }
+}
+```
+
+### OpenAI API (Responses)
+
+```python
+from openai import OpenAI
+
+client = OpenAI()
+response = client.responses.create(
+    model="gpt-4.1",
+    tools=[{
+        "type": "mcp",
+        "server_label": "fda-data",
+        "server_url": "https://www.regdatalab.com/mcp",
+        "require_approval": "never",  # tools are read-only
+        "headers": {"Authorization": "Bearer YOUR_API_KEY"},
+    }],
+    input="Give me a manufacturing risk summary for Pfizer",
+)
+print(response.output_text)
+```
+
+### VS Code One-Click Install
+
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=fda-data-mcp&inputs=%5B%7B%22password%22%3Atrue%2C%22id%22%3A%22fda-data-api-key%22%2C%22type%22%3A%22promptString%22%2C%22description%22%3A%22FDA%20Data%20MCP%20API%20key%20%28from%20regdatalab.com/signup%29%22%7D%5D&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22fda-data-mcp%22%5D%2C%22env%22%3A%7B%22FDA_DATA_API_KEY%22%3A%22%24%7Binput%3Afda-data-api-key%7D%22%7D%7D)
+
+### Generic MCP clients
+
+- URL: `https://www.regdatalab.com/mcp` (Streamable HTTP)
+- Auth: OAuth 2.1 with PKCE and dynamic client registration, or the header `Authorization: Bearer YOUR_API_KEY`
+- Discovery file: `https://www.regdatalab.com/.well-known/mcp.json`
+
+### npx wrapper (stdio-only clients)
+
+For clients that can only start a local command, such as `claude_desktop_config.json`:
 
 ```json
 {
@@ -64,124 +148,16 @@ Config file location:
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
 
-Restart Claude Desktop after saving.
-
-### Claude Cowork
-
-1. Go to Settings or Customize, then Connectors
-2. Add a custom connector named `FDA Data`
-3. Paste this URL (replace with your key):
-
-```
-https://www.regdatalab.com/mcp?apiKey=YOUR_API_KEY
-```
-
-4. Save and start a new project chat with the connector enabled
-
-### Claude Code
-
-```bash
-claude mcp add fda-data \
-  "https://www.regdatalab.com/mcp?apiKey=YOUR_API_KEY" \
-  --transport http \
-  --scope user
-```
-
-Verify with `/mcp`. You should see `fda-data` and the manufacturing-first toolset.
-
-### Cursor
-
-Add to `.cursor/mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "fda-data": {
-      "url": "https://www.regdatalab.com/mcp?apiKey=YOUR_API_KEY"
-    }
-  }
-}
-```
-
-### Windsurf
-
-Add to `~/.codeium/windsurf/mcp_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "fda-data": {
-      "url": "https://www.regdatalab.com/mcp?apiKey=YOUR_API_KEY"
-    }
-  }
-}
-```
-
-### ChatGPT / OpenAI API
-
-```python
-from openai import OpenAI
-
-client = OpenAI()
-response = client.responses.create(
-    model="gpt-4.1",
-    tools=[{
-        "type": "mcp",
-        "server_label": "fda-data",
-        "server_url": "https://www.regdatalab.com/mcp",
-        "require_approval": "never",
-        "headers": {
-            "Authorization": "Bearer YOUR_API_KEY"
-        }
-    }],
-    input="Give me a manufacturing risk summary for Pfizer"
-)
-print(response.output_text)
-```
-
-### VS Code One-Click Install
-
-[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_MCP-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=fda-data-mcp&inputs=%5B%7B%22password%22%3Atrue%2C%22id%22%3A%22fda-data-api-key%22%2C%22type%22%3A%22promptString%22%2C%22description%22%3A%22FDA%20Data%20MCP%20API%20key%20%28from%20regdatalab.com/signup%29%22%7D%5D&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22fda-data-mcp%22%5D%2C%22env%22%3A%7B%22FDA_DATA_API_KEY%22%3A%22%24%7Binput%3Afda-data-api-key%7D%22%7D%7D)
-
-### Generic MCP clients
-
-- URL: `https://www.regdatalab.com/mcp?apiKey=YOUR_API_KEY`
-- Or with header: `Authorization: Bearer YOUR_API_KEY` to `https://www.regdatalab.com/mcp`
-- Discovery file: `https://www.regdatalab.com/.well-known/mcp.json`
-
-### npx wrapper (fallback for older clients)
-
-For clients that don't support native HTTP URLs, use the stdio wrapper:
-
-```bash
-FDA_DATA_API_KEY=YOUR_API_KEY npx -y fda-data-mcp
-```
-
-Or in a JSON config:
-
-```json
-{
-  "mcpServers": {
-    "fda-data": {
-      "command": "npx",
-      "args": ["-y", "fda-data-mcp"],
-      "env": {
-        "FDA_DATA_API_KEY": "YOUR_API_KEY"
-      }
-    }
-  }
-}
-```
+Or from a shell: `FDA_DATA_API_KEY=YOUR_API_KEY npx -y fda-data-mcp`
 
 The wrapper is a zero-dependency stdio-to-HTTP proxy:
 
 - source: [`bin/fda-data-mcp.js`](./bin/fda-data-mcp.js)
 - proxy: [`lib/stdio-proxy.js`](./lib/stdio-proxy.js)
 
-If you do not have an API key yet, sign up here:
+The version on npm can lag this repo; see [CHANGELOG.md](./CHANGELOG.md) for what each published version contains.
 
-- [regdatalab.com/signup](https://www.regdatalab.com/signup)
-- includes **300 free credits/month**
+If you do not have an API key yet, sign up at [regdatalab.com/signup](https://www.regdatalab.com/signup). A new key starts with 50 credits; verifying your email unlocks 300 free credits a month.
 
 ## Example Prompts
 
@@ -207,6 +183,7 @@ FDA Data MCP covers live hosted access to datasets including:
 - device registrations and listings
 - device UDI
 - drug shortages
+- MES, QMS and LIMS software vendor evidence (`software_*` tools)
 
 For the canonical and current product surface, use:
 
@@ -216,9 +193,10 @@ For the canonical and current product surface, use:
 ## Auth and Pricing
 
 - Sign up for an API key at [regdatalab.com/signup](https://www.regdatalab.com/signup)
-- Pass the key as `?apiKey=YOUR_API_KEY` in the URL (simplest)
-- Or use the `Authorization: Bearer YOUR_API_KEY` header
-- Or set `FDA_DATA_API_KEY=YOUR_API_KEY` when using the npx wrapper
+- OAuth-capable clients: add the bare URL and sign in; no key in your config
+- Other HTTP clients: send the `Authorization: Bearer YOUR_API_KEY` header
+- The npx wrapper: set `FDA_DATA_API_KEY=YOUR_API_KEY`
+- Never put a key in a URL or in an issue report
 - Free and paid plans are listed at [regdatalab.com/pricing](https://www.regdatalab.com/pricing)
 
 ## Why This Repo Exists
@@ -235,7 +213,7 @@ The production backend and ingestion engine live separately.
 
 - Docs: [regdatalab.com/docs](https://www.regdatalab.com/docs)
 - Connect: [regdatalab.com/connect.md](https://www.regdatalab.com/connect.md)
-- Email: [hello@regdatalab.com](mailto:hello@regdatalab.com)
+- Email: [hello@runsales.ai](mailto:hello@runsales.ai)
 
 ## Changelog and Releases
 
