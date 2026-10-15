@@ -1,0 +1,20 @@
+{
+  "name": "regdatalab",
+  "interface": {
+    "displayName": "RegDataLab"
+  },
+  "plugins": [
+    {
+      "name": "regdatalab",
+      "source": {
+        "source": "local",
+        "path": "./plugins/regdatalab"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    }
+  ]
+}
