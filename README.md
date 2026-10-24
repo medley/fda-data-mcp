@@ -213,7 +213,7 @@ The production backend and ingestion engine live separately.
 
 - Docs: [regdatalab.com/docs](https://www.regdatalab.com/docs)
 - Connect: [regdatalab.com/connect.md](https://www.regdatalab.com/connect.md)
-- Email: [hello@runsales.ai](mailto:hello@runsales.ai)
+- Email: [hello@regdatalab.com](mailto:hello@regdatalab.com)
 
 ## Changelog and Releases
 
