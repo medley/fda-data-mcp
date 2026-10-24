@@ -5,7 +5,7 @@ For product help, setup questions, billing, or MCP client configuration issues:
 - Docs: `https://www.regdatalab.com/docs`
 - Connect guide: `https://www.regdatalab.com/connect.md`
 - Pricing: `https://www.regdatalab.com/pricing`
-- Email: `hello@runsales.ai`
+- Email: `hello@regdatalab.com`
 
 Use this GitHub repo for:
 
