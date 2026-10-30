@@ -1,12 +1,11 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.medley/fda-data-mcp",
-  "title": "FDA Data MCP",
-  "description": "Hosted MCP for FDA regulatory, manufacturing, and compliance intelligence.",
-  "version": "0.4.2",
+  "name": "io.github.medley/fda-data",
+  "title": "RegDataLab",
+  "description": "51 tools to review public FDA records by company, site or product, with source dates.",
+  "version": "1.1.0",
   "websiteUrl": "https://www.regdatalab.com",
   "repository": {
-    "id": "1155954101",
     "url": "https://github.com/medley/fda-data-mcp",
     "source": "github"
   },
@@ -17,20 +16,11 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer API key for FDA Data MCP",
-          "value": "{auth_header}",
-          "isRequired": true,
+          "description": "Optional. Bearer YOUR_API_KEY. Leave unset to sign in with OAuth.",
+          "isRequired": false,
           "isSecret": true
         }
-      ],
-      "variables": {
-        "auth_header": {
-          "description": "Use the format: Bearer YOUR_API_KEY",
-          "isRequired": true,
-          "isSecret": true,
-          "placeholder": "Bearer fda_..."
-        }
-      }
+      ]
     }
   ]
 }
