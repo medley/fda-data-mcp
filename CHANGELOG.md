@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
+- `server.json` now targets the existing official MCP Registry entry `io.github.medley/fda-data` at version 1.1.0 (OAuth or optional Bearer header). See `REGISTRY.md`.
 - README setup now leads with OAuth sign-in and the `Authorization` header, and no longer shows API keys in URLs.
 - Support and security contact is `hello@regdatalab.com`.
 - ChatGPT setup uses Plugins > + > Add custom MCP server; the directory listing is in review, not published.
