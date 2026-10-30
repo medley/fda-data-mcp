@@ -7,7 +7,7 @@ package, so republishing it never needs an npm publish.
 
 - Name: `io.github.medley/fda-data` (the name already in the registry since 2026-02-07)
 - Version: `1.1.0` (the registry holds `1.0.0`; each publish needs a new, higher version)
-- Tools: 51 live (46 FDA plus 5 software), per `https://www.regdatalab.com/.well-known/mcp.json`
+- Tools: not stored in the entry; clients read them from the server. `GET https://www.regdatalab.com/api` is the authoritative list
 - Auth: OAuth sign-in, or an optional `Authorization: Bearer` header
 
 ## Publish (owner only, externally visible)
