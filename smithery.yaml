@@ -1,4 +1,4 @@
-# Smithery configuration for the hosted FDA Data MCP server.
+# Smithery configuration for the hosted RegDataLab MCP server (FDA data).
 
 startCommand:
   type: stdio
@@ -9,7 +9,7 @@ startCommand:
     properties:
       apiKey:
         type: string
-        description: Your FDA Data MCP API key from regdatalab.com/signup.
+        description: Your RegDataLab API key from regdatalab.com/signup.
   commandFunction:
     |-
     config => ({

@@ -1,14 +1,14 @@
-# FDA Data MCP
+# RegDataLab MCP server (fda-data-mcp)
 
-Hosted MCP server for FDA regulatory, manufacturing, and compliance intelligence.
+Public FDA compliance records (inspections, Form 483s, warning letters, recalls) linked by company and site, for Claude, ChatGPT, any MCP client or API.
 
-This is the public install and discovery repo for **FDA Data MCP**. The live MCP endpoint is hosted at **RegDataLab**. The private backend, ingestion system, and production data pipeline are not open-sourced here.
+This is the public install and discovery repo for **RegDataLab**, the hosted FDA data MCP server at https://www.regdatalab.com/mcp. The npm package keeps the name `fda-data-mcp`. The private backend, ingestion system, and production data pipeline are not open-sourced here.
 
 [![Website](https://img.shields.io/badge/website-regdatalab.com-0f172a?style=flat-square)](https://www.regdatalab.com)
 [![Connect Guide](https://img.shields.io/badge/docs-connect.md-0369a1?style=flat-square)](https://www.regdatalab.com/connect.md)
 [![Release](https://img.shields.io/github/v/release/medley/fda-data-mcp?display_name=tag&style=flat-square)](https://github.com/medley/fda-data-mcp/releases)
 
-![FDA Data MCP homepage screenshot](./assets/fda-data-mcp-homepage.png)
+![RegDataLab homepage screenshot](./assets/fda-data-mcp-homepage.png)
 
 ## Quick Links
 
@@ -25,7 +25,7 @@ This is the public install and discovery repo for **FDA Data MCP**. The live MCP
 
 ## What It Does
 
-FDA Data MCP gives AI agents structured access to FDA data for questions like:
+RegDataLab gives AI agents structured access to FDA data for questions like:
 
 - Which facilities does this company operate?
 - Has FDA inspected them recently?
@@ -168,7 +168,7 @@ If you do not have an API key yet, sign up at [regdatalab.com/signup](https://ww
 
 ## Data Coverage
 
-FDA Data MCP covers live hosted access to datasets including:
+RegDataLab covers live hosted access to datasets including:
 
 - FDA inspections
 - FDA citations
