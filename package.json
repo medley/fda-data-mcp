@@ -1,7 +1,7 @@
 {
   "name": "fda-data-mcp",
   "version": "0.4.2",
-  "description": "Wrapper-first install package for the hosted FDA Data MCP endpoint.",
+  "description": "Public FDA compliance records (inspections, Form 483s, warning letters, recalls) linked by company and site, for Claude, ChatGPT, any MCP client or API.",
   "license": "MIT",
   "type": "commonjs",
   "bin": {
