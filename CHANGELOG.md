@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
+- Registry listing renamed to "RegDataLab – FDA Compliance Data" with a plainer description; `server.json` version 1.1.1 for the next registry publish.
 - `server.json` now targets the existing official MCP Registry entry `io.github.medley/fda-data` at version 1.1.0 (OAuth or optional Bearer header). See `REGISTRY.md`.
 - README setup now leads with OAuth sign-in and the `Authorization` header, and no longer shows API keys in URLs.
 - Support and security contact is `hello@regdatalab.com`.
