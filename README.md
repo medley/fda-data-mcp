@@ -8,6 +8,27 @@ This is the public install and discovery repo for **RegDataLab – FDA Complianc
 [![Connect Guide](https://img.shields.io/badge/docs-connect.md-0369a1?style=flat-square)](https://www.regdatalab.com/connect.md)
 [![MCP Registry](https://img.shields.io/badge/MCP_Registry-io.github.medley%2Ffda--data-334155?style=flat-square)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.medley/fda-data)
 
+## One question, the whole company family
+
+Ask about a supplier by the name you know. RegDataLab finds the subsidiaries FDA files under other names, then answers across all of them, with a link to the FDA source on every record.
+
+> **You ask:** "Check Baxter as a supplier."
+
+One call to `fda_manufacturing_risk_summary` searches Baxter and 21 linked companies, including Hillrom and Welch Allyn:
+
+| | Across the Baxter family |
+|---|---|
+| **Sites** | 65 FDA-registered or inspected sites |
+| **Inspections** | 201 on record: 103 NAI, 72 VAI, 26 OAI. Latest OAI: Round Lake, IL, April 2026 |
+| **Warning letters** | 15, most recent [September 29, 2026](https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/baxter-international-inc-733231-09292026) |
+| **Form 483s** | Latest published: [Baxter Healthcare, Round Lake](https://www.fda.gov/media/195554/download) and [Baxter Oncology GmbH](https://www.fda.gov/media/190881/download) |
+| **Recalls** | 703 distinct recalls, 324 in the last 5 years |
+| **Import alerts** | 1 red-list entry on [Import Alert 66-40](https://www.accessdata.fda.gov/cms_ia/importalert_189.html) (2014) |
+
+From a real answer on November 12, 2026. Searching FDA's own sites for "Baxter" would miss the Hillrom and Welch Allyn records. NAI, VAI and OAI are FDA's inspection outcomes: no action, voluntary action, official action indicated.
+
+Try it without an account: look up any company at [regdatalab.com](https://www.regdatalab.com), or [get a free API key](https://www.regdatalab.com/signup) (50 credits, no card) and ask your own question.
+
 ![RegDataLab homepage screenshot](./assets/fda-data-mcp-homepage.png)
 
 ## Quick Links
