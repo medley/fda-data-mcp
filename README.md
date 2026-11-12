@@ -27,7 +27,23 @@ One call to `fda_manufacturing_risk_summary` searches Baxter and 21 linked compa
 
 From a real answer on November 12, 2026. Searching FDA's own sites for "Baxter" would miss the Hillrom and Welch Allyn records. NAI, VAI and OAI are FDA's inspection outcomes: no action, voluntary action, official action indicated.
 
-Try it without an account: look up any company at [regdatalab.com](https://www.regdatalab.com), or [get a free API key](https://www.regdatalab.com/signup) (50 credits, no card) and ask your own question.
+## Try it now, no signup
+
+Paste this into a terminal with Claude Code. It uses the shared demo key from the [regdatalab.com](https://www.regdatalab.com) home page:
+
+```bash
+claude mcp add regdatalab-demo https://www.regdatalab.com/mcp \
+  --transport http \
+  --header "Authorization: Bearer fda_demo_GKNDjUOjPbhLZZVPvRHDlY3zP_H3HXzTMRbHVD_I5rg"
+```
+
+Then ask: "Check Baxter as a supplier." The demo key is shared by every visitor and capped at 20 requests per minute and 50 credits per IP address. For your own key, [sign up free](https://www.regdatalab.com/signup) (50 credits, no card), or add the bare URL and sign in as shown under [Quick Start](#quick-start).
+
+The same question in ChatGPT, from question to sourced answer:
+
+![A question about Pfizer answered in ChatGPT with RegDataLab: inspections, Form 483s, recalls and warning letters, each with its source](./assets/regdatalab-chatgpt-demo.gif)
+
+Full walkthrough (4 minutes): [regdatalab-chatgpt-review-walkthrough.mp4](https://www.regdatalab.com/videos/regdatalab-chatgpt-review-walkthrough.mp4). No terminal? Look up any company at [regdatalab.com](https://www.regdatalab.com).
 
 ![RegDataLab homepage screenshot](./assets/fda-data-mcp-homepage.png)
 
