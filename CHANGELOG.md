@@ -8,11 +8,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 
-- Registry listing renamed to "RegDataLab – FDA Compliance Data" with a plainer description; `server.json` version 1.1.1 for the next registry publish.
-- `server.json` now targets the existing official MCP Registry entry `io.github.medley/fda-data` at version 1.1.0 (OAuth or optional Bearer header). See `REGISTRY.md`.
-- README setup now leads with OAuth sign-in and the `Authorization` header, and no longer shows API keys in URLs.
+- README matches the live connector: 51 tools over 35 FDA datasets, OAuth sign-in for Claude Code, Cursor, VS Code and Codex, the Claude connector directory listing, and current ChatGPT custom MCP server steps. ChatGPT's app directory does not list RegDataLab yet.
+- Config examples use the server name `regdatalab`, as the connect guide does. The VS Code button adds the hosted URL instead of the npx wrapper.
+- Added the FDA data source and independence statement.
+- New homepage screenshot and social preview image.
+- `REGISTRY.md` records that 1.1.1 is live; the next publish is 1.1.2.
+
+## MCP Registry 1.1.1 - 2026-11-12
+
+### Changed
+
+- Registry listing renamed to "RegDataLab – FDA Compliance Data" with a plainer description, published as `io.github.medley/fda-data` 1.1.1 (1.1.0 went out on 2026-11-03). OAuth or optional Bearer header. See `REGISTRY.md`.
+- README setup leads with OAuth sign-in and the `Authorization` header, and no longer shows API keys in URLs.
 - Support and security contact is `hello@regdatalab.com`.
-- ChatGPT setup uses Plugins > + > Add custom MCP server; the directory listing is in review, not published.
 
 ## [v0.4.2] - merged 2026-10-13, not yet on npm
 
