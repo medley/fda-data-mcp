@@ -12,7 +12,7 @@ package, so republishing it never needs an npm publish.
 
 ## Publish (owner only, externally visible)
 
-Run from a checkout of `main` after this file's PR merges:
+Run from an up-to-date checkout of `main`:
 
 ```bash
 brew install mcp-publisher        # once
