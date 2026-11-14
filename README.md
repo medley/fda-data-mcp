@@ -301,10 +301,6 @@ RegDataLab is an independent data product, not affiliated with, endorsed by, or 
 - Connect: [regdatalab.com/connect.md](https://www.regdatalab.com/connect.md)
 - Email: [hello@regdatalab.com](mailto:hello@regdatalab.com)
 
-## Changelog and Releases
-
-- Version history lives in [CHANGELOG.md](./CHANGELOG.md)
-
 ## Security
 
 If you find a security issue, do not open a public issue. Use the policy in [SECURITY.md](./SECURITY.md).
