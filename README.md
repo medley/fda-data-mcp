@@ -2,6 +2,8 @@
 
 RegDataLab is an [FDA MCP server](https://www.regdatalab.com/fda-mcp-server) for public FDA compliance records (inspections, Form 483s, warning letters, recalls) linked by company and site, for Claude, ChatGPT, any MCP client or API.
 
+Independent; not affiliated with or endorsed by the U.S. FDA.
+
 This is the public install and discovery repo for **RegDataLab – FDA Compliance Data**, the hosted MCP server at https://www.regdatalab.com/mcp. It has 51 read-only tools over 35 public FDA datasets, and every record links back to its FDA source. The npm package keeps the name `fda-data-mcp`. The private backend, ingestion system, and production data pipeline are not open-sourced here.
 
 [![Website](https://img.shields.io/badge/website-regdatalab.com-0f172a?style=flat-square)](https://www.regdatalab.com)
