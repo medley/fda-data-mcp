@@ -1,0 +1,15 @@
+{
+  "name": "regdatalab",
+  "owner": {
+    "name": "Wasatch Crest Holdings LLC",
+    "email": "hello@regdatalab.com"
+  },
+  "description": "RegDataLab plugins for public FDA compliance records.",
+  "plugins": [
+    {
+      "name": "regdatalab",
+      "source": "./plugins/regdatalab",
+      "description": "RegDataLab connector plus five FDA workflow skills: supplier due diligence, facility inspection brief, recall and warning letter check, changes since last review, and company match check."
+    }
+  ]
+}
