@@ -86,6 +86,14 @@ The hosted endpoint is `https://www.regdatalab.com/mcp`. Pick the first path you
 
 Never put an API key in a URL: the server refuses a key in the query string. The canonical, current client steps are in the [connect guide](https://www.regdatalab.com/connect.md).
 
+### Plugin with workflow skills (Claude Code, Cursor)
+
+The [RegDataLab plugin](plugins/regdatalab) bundles this connector with five workflow skills: supplier due diligence, facility inspection brief, recall and warning letter check, changes since last review, and company match check. In Claude Code:
+
+```
+/plugin install regdatalab --marketplace medley/fda-data-mcp
+```
+
 ### claude.ai, Claude Desktop and Cowork
 
 RegDataLab is listed in Claude's connector directory.

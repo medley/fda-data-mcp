@@ -1,0 +1,19 @@
+{
+  "name": "regdatalab",
+  "version": "1.0.0",
+  "description": "Review public FDA records for a supplier, manufacturing site or product: inspections, Form 483 observations, warning letters, import alerts and recalls.",
+  "author": {
+    "name": "Wasatch Crest Holdings LLC",
+    "email": "hello@regdatalab.com"
+  },
+  "homepage": "https://www.regdatalab.com",
+  "license": "MIT",
+  "keywords": ["fda", "supplier-quality", "compliance", "recalls", "inspections", "public-data"],
+  "logo": "assets/logo.png",
+  "skills": "./skills/",
+  "mcpServers": {
+    "regdatalab": {
+      "url": "https://www.regdatalab.com/mcp"
+    }
+  }
+}
