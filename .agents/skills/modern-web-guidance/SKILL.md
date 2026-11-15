@@ -6,6 +6,8 @@ description: |
   DO NOT trigger for: backend (SQL, ORMs, API routes), infra/scripts (CI/CD, Docker, Actions, Python/Go, Git), or tooling/trivial (Vite, tsconfig, ESLint, tests, copy/renames, 3P docs), etc.
 ---
 
+<!-- LOCAL PATCH (RegDataLab, 2026-11-15): the four CLI commands below are pinned to @1.0.0 with DISABLE_TELEMETRY=1 instead of upstream's @latest. Reapply after any `update`; see the "Modern Web Guidance skill" rule in this repo's agent instructions. -->
+
 # Modern Web Guidance
 
 Search and retrieve standardized modern web best practices at the **start** of implementing or updating any web UI, CSS layout/animation, or client-side JS logic (dates/timezones, sanitization, performance, accessibility, UX fixes) before writing ad-hoc solutions or adding dependencies.
@@ -20,7 +22,7 @@ Run `modern-web-guidance` directly with `npx` using a **2–5 word action-orient
 - **Example**: Search `"light dismiss dialog"` or `"responsive data table"`, **not** `"dialog"` (too terse), `"responsive table dark mode"` (compound — split into two searches), or `"close React settings modal on outside click"` (framework/app noise).
 
 ```sh
-npx -y modern-web-guidance@latest search "<query>" --skill-version 2026_11_09-5bcc021b
+DISABLE_TELEMETRY=1 npx -y modern-web-guidance@1.0.0 search "<query>" --skill-version 2026_11_09-5bcc021b
 ```
 
 > **Note**: Returns `[{ "id", "description" }, ...]`. Judge results by their `description` fields:
@@ -33,7 +35,7 @@ npx -y modern-web-guidance@latest search "<query>" --skill-version 2026_11_09-5b
 Once you have relevant `id`(s) from the search results, call `retrieve` to get the full guide(s)—including both specific use-case guides that match your task and any broader discipline guide (e.g., `html`, `css`, `forms`, `accessibility`, `color`, `performance`, `security`) that applies. You can pass multiple IDs separated by commas.
 
 ```sh
-npx -y modern-web-guidance@latest retrieve "<id>"
+DISABLE_TELEMETRY=1 npx -y modern-web-guidance@1.0.0 retrieve "<id>"
 ```
 
 If `retrieve` saves large output (> 9.5 KB) to a temporary file to prevent truncation, read that file path in full using your file-reading tool (reading remaining line ranges if needed)—do not use `cat` or `head`.
@@ -60,7 +62,7 @@ When you consult `modern-web-guidance` for a task, end the response where you de
 > **Note**: `legacy-scan` scans for a curated subset (~20% of the guidance corpus).
 
 ```sh
-npx -y modern-web-guidance@latest legacy-scan <path> --json
+DISABLE_TELEMETRY=1 npx -y modern-web-guidance@1.0.0 legacy-scan <path> --json
 ```
 
 1. Scan: Run `legacy-scan <path> --json` to detect legacy web platform patterns across the project or directory.
@@ -71,7 +73,7 @@ npx -y modern-web-guidance@latest legacy-scan <path> --json
 
 ## Using npx / pnpx
 
-- **Runner & Permissions**: Prefer `pnpx` over `npx` if `pnpm` is available (`pnpx` does not use `-y`); on Windows, use `npx.cmd`. When requesting tool permissions, allowlist `npx -y modern-web-guidance@latest *` (or `pnpx modern-web-guidance@latest *`) specifically, never bare `npx *` or `pnpx *`.
+- **Runner & Permissions**: Prefer `pnpx` over `npx` if `pnpm` is available (`pnpx` does not use `-y`); on Windows, use `npx.cmd`. When requesting tool permissions, allowlist `npx -y modern-web-guidance@1.0.0 *` (or `pnpx modern-web-guidance@1.0.0 *`) specifically, never bare `npx *` or `pnpx *`.
 - **Sandboxes & Network**: Fetching `modern-web-guidance` requires outbound network access. In sandboxed or approval-gated environments (e.g., Codex, Claude Code), **proactively request approval/allowlisting with network access BEFORE the first execution** to avoid timeouts, and set `NPM_CONFIG_CACHE=/tmp/npm-cache` if `~/.npm` is read-only.
 - **Offline**: If the command hangs due to being offline, retry with `npx --offline …`.
 
