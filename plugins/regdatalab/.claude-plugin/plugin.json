@@ -10,5 +10,17 @@
   },
   "homepage": "https://www.regdatalab.com",
   "license": "MIT",
-  "keywords": ["fda", "supplier-quality", "compliance", "recalls", "inspections", "public-data"]
+  "keywords": [
+    "fda",
+    "supplier-quality",
+    "compliance",
+    "recalls",
+    "inspections",
+    "public-data"
+  ],
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://www.regdatalab.com/docs",
+  "supportUrl": "https://www.regdatalab.com/support",
+  "privacyPolicyUrl": "https://www.regdatalab.com/privacy",
+  "termsOfServiceUrl": "https://www.regdatalab.com/terms"
 }
