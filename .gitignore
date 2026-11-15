@@ -1,3 +1,6 @@
 *.tgz
 .DS_Store
 node_modules/
+
+# Modern Web Guidance guide files: agents fetch them with `npx modern-web-guidance retrieve`, so they are not committed
+.agents/skills/modern-web-guidance/guides/
