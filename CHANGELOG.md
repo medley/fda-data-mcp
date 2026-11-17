@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- `FDA_DATA_AUTH_HEADER` without a `Name: value` colon is rejected up front. It used to be sent with no Authorization header and then fail as a generic 401.
+
 ### Changed
 
 - README matches the live connector: 51 tools over 35 FDA datasets, OAuth sign-in for Claude Code, Cursor, VS Code and Codex, the Claude connector directory listing, and current ChatGPT custom MCP server steps. ChatGPT's app directory does not list RegDataLab yet.
