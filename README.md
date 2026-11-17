@@ -39,7 +39,7 @@ claude mcp add regdatalab-demo https://www.regdatalab.com/mcp \
   --header "Authorization: Bearer fda_demo_GKNDjUOjPbhLZZVPvRHDlY3zP_H3HXzTMRbHVD_I5rg"
 ```
 
-Then ask: "Check Baxter as a supplier." The demo key is shared by every visitor and capped at 20 requests per minute and 50 credits per IP address. For your own key, [sign up free](https://www.regdatalab.com/signup) (50 credits, no card), or add the bare URL and sign in as shown under [Quick Start](#quick-start).
+Then ask: "Check Baxter as a supplier." The demo key is shared by every visitor. Each IP address gets 10 requests per minute and 50 credits, and all visitors together share 60 requests per minute. For your own key, [sign up free](https://www.regdatalab.com/signup) (50 credits, no card), or add the bare URL and sign in as shown under [Quick Start](#quick-start).
 
 The same question in ChatGPT, from question to sourced answer:
 
