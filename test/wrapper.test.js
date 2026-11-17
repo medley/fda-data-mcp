@@ -40,7 +40,8 @@ test('buildAuthHeader throws when no auth env is present', () => {
   assert.throws(() => buildAuthHeader({}), (error) => {
     assert.match(error.message, /FDA_DATA_API_KEY/);
     assert.match(error.message, /regdatalab\.com\/signup/);
-    assert.match(error.message, /300 free credits\/month/);
+    assert.match(error.message, /50 credits now/);
+    assert.match(error.message, /300 a month after you verify your email/);
     return true;
   });
 });
