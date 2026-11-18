@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- `FDA_DATA_AUTH_HEADER` without a `Name: value` colon is rejected up front. It used to be sent with no Authorization header and then fail as a generic 401.
+
 ### Changed
 
 - The npx wrapper's `--help` text and missing-key error say a new key starts with 50 credits, and 300 a month after email verification.

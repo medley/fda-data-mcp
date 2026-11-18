@@ -51,6 +51,15 @@ test('buildAuthHeader throws for empty string API key', () => {
   assert.throws(() => buildAuthHeader({ FDA_DATA_API_KEY: '   ' }));
 });
 
+test('buildAuthHeader rejects an auth header that is not Name: value', () => {
+  assert.throws(
+    () => buildAuthHeader({ FDA_DATA_AUTH_HEADER: 'Bearer fda_test_123', FDA_DATA_API_KEY: 'fda_test_123' }),
+    /FDA_DATA_AUTH_HEADER must look like/,
+  );
+  assert.throws(() => buildAuthHeader({ FDA_DATA_AUTH_HEADER: 'Authorization:' }));
+  assert.throws(() => buildAuthHeader({ FDA_DATA_AUTH_HEADER: ': Bearer fda_test_123' }));
+});
+
 test('parseSSE extracts messages from SSE format', () => {
   const sse = 'event: message\ndata: {"jsonrpc":"2.0","id":1,"result":{"ok":true}}\n\n';
   const messages = parseSSE(sse);
