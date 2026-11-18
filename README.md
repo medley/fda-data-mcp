@@ -81,7 +81,7 @@ The strongest current use case is **manufacturing and compliance intelligence** 
 The hosted endpoint is `https://www.regdatalab.com/mcp`. Pick the first path your client supports:
 
 1. **OAuth sign-in** (claude.ai, Claude Desktop, Claude Code, ChatGPT, Cursor, VS Code, Codex and other OAuth-capable clients): add the bare URL and sign in. No key in your config.
-2. **Authorization header** (CI, scripts, the OpenAI API, clients without sign-in): send `Authorization: Bearer YOUR_API_KEY`.
+2. **Authorization header** (CI, scripts, the OpenAI API, Cline and other clients without sign-in): send `Authorization: Bearer YOUR_API_KEY`. Cline also needs `"type": "streamableHttp"`. See [Cline](#cline).
 3. **npx wrapper** (stdio-only clients): set `FDA_DATA_API_KEY`.
 
 Never put an API key in a URL: the server refuses a key in the query string. The canonical, current client steps are in the [connect guide](https://www.regdatalab.com/connect.md).
@@ -186,6 +186,37 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
   }
 }
 ```
+
+### Cline
+
+Get a key at [regdatalab.com/signup](https://www.regdatalab.com/signup). Add this to `~/.cline/data/settings/cline_mcp_settings.json`, or open Cline's MCP Servers UI, choose **Streamable HTTP** on the Remote Servers tab, and enter the same URL and header:
+
+```json
+{
+  "mcpServers": {
+    "regdatalab": {
+      "type": "streamableHttp",
+      "url": "https://www.regdatalab.com/mcp",
+      "headers": { "Authorization": "Bearer YOUR_API_KEY" },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
+```
+
+Set `"type": "streamableHttp"` explicitly. Cline defaults to the legacy SSE transport when `type` is missing, and an SSE GET to `https://www.regdatalab.com/mcp` returns 405. Write the key in the header as plain text, `Bearer YOUR_API_KEY` with your key in place of `YOUR_API_KEY`. If the file already has other servers, add `regdatalab` under `mcpServers` and leave those entries in place.
+
+From a shell (`--transport http` is the flag in Cline's current docs, and it saves `"type": "streamableHttp"`):
+
+```bash
+cline mcp add regdatalab https://www.regdatalab.com/mcp \
+  --transport http \
+  --header "Authorization: Bearer YOUR_API_KEY" \
+  --yes
+```
+
+Then ask: "Check Baxter as a supplier." You should see facility and compliance records with FDA source links.
 
 ### OpenAI API (Responses)
 
