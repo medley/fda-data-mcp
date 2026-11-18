@@ -22,7 +22,7 @@ This wrapper proxies stdio clients to:
 
 Get a free API key:
   https://www.regdatalab.com/signup
-  Includes 300 free credits/month.
+  50 credits now, 300 a month after you verify your email.
 `.trim());
   process.exit(0);
 }
