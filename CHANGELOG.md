@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Cline install steps in the README and `llms-install.md`. The config sets `"type": "streamableHttp"`, because a missing type makes Cline use legacy SSE and `https://www.regdatalab.com/mcp` returns 405.
+
 ### Fixed
 
 - `FDA_DATA_AUTH_HEADER` without a `Name: value` colon is rejected up front. It used to be sent with no Authorization header and then fail as a generic 401.
