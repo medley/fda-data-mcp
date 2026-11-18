@@ -10,7 +10,7 @@ Write a one-site brief from public FDA records using the RegDataLab connector. T
 ## Steps
 
 1. **Find the FEI.** If the user gave an FEI, use it. If they gave a company and a city, call `fda_search_facilities` with `company` and `city` (or `state` or `country`) and show the matches. If more than one site fits, ask which one before going on.
-2. **Read the site.** Call `fda_facility_dossier` with the FEI for inspections, citations, Form 483s, warning letters, import alerts and recalls. Use `evidence_limit` 10 or more when the user wants the full history.
+2. **Read the site.** Call `fda_facility_dossier` with the FEI for inspections, citations, Form 483s, warning letters, import alerts and recalls. Use `evidence_limit` 10, or up to 20 (the maximum), when the user wants the full history.
    For the registered address, operations and products, also call `fda_get_facility` with `fei` if your connection lists it.
 3. **Read every inspection.** Call `fda_inspections` with `fei_number` and no date filter to get the full list, newest first. While `pagination.has_more` is true, call again with `offset` set to `pagination.next_offset`.
 4. **Group the observations.** Call `fda_citations` with `fei_number`, and page the same way until `pagination.has_more` is false, so older inspections are counted too. If you stop early, label the counts as partial and say how many of `pagination.total_count` you read. Group the citations by CFR section (`act_cfr_number`) and count how often each section appears and in which inspections. Repeat citations across inspections matter most.
