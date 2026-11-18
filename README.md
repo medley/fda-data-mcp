@@ -4,7 +4,7 @@ RegDataLab is an [FDA MCP server](https://www.regdatalab.com/fda-mcp-server) for
 
 Independent; not affiliated with or endorsed by the U.S. FDA.
 
-This is the public install and discovery repo for **RegDataLab – FDA Compliance Data**, the hosted MCP server at https://www.regdatalab.com/mcp. It has 51 read-only tools over 35 public FDA datasets, and every record links back to its FDA source. The npm package keeps the name `fda-data-mcp`. The private backend, ingestion system, and production data pipeline are not open-sourced here.
+This is the public install and discovery repo for **RegDataLab – FDA Compliance Data**, the hosted MCP server at https://www.regdatalab.com/mcp. It has 52 tools: 51 read-only tools over 35 public FDA datasets, plus a free `submit_feedback` tool that sends a note to the RegDataLab team and does not change FDA records. Every FDA record links back to its FDA source. The npm package keeps the name `fda-data-mcp`. The private backend, ingestion system, and production data pipeline are not open-sourced here.
 
 [![Website](https://img.shields.io/badge/website-regdatalab.com-0f172a?style=flat-square)](https://www.regdatalab.com)
 [![Connect Guide](https://img.shields.io/badge/docs-connect.md-0369a1?style=flat-square)](https://www.regdatalab.com/connect.md)
@@ -303,6 +303,8 @@ RegDataLab reads 35 public FDA datasets, including:
 - adverse event reports
 - MES, QMS and LIMS software vendor evidence (`software_*` tools)
 
+`submit_feedback` is separate from those FDA and data tools. It lets a user or their assistant send feedback to the RegDataLab team (`bug`, `data_issue`, `feature_request`, `praise`, or `other`), costs 0 credits, and does not change FDA records.
+
 Company lookups match legal names, former names and common short names (for example "Philips"), and can widen to a company's corporate family.
 
 For the current tool list and dataset freshness, use:
@@ -318,7 +320,7 @@ For the current tool list and dataset freshness, use:
 - Other HTTP clients: send the `Authorization: Bearer YOUR_API_KEY` header
 - The npx wrapper: set `FDA_DATA_API_KEY=YOUR_API_KEY`
 - Never put a key in a URL or in an issue report
-- Each tool call uses credits; calls that fail on bad input or a server error are free
+- Each tool call uses credits, except `submit_feedback`, which is free (0 credits); calls that fail on bad input or a server error are free
 - A new account starts with 50 credits; verifying your email adds 300 free credits a month. No card required
 - Paid plans are listed at [regdatalab.com/pricing](https://www.regdatalab.com/pricing)
 
