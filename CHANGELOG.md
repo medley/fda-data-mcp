@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- `server.json` 1.1.2 carries an `icons` array with the RegDataLab square icon (512x512 PNG), so the official MCP Registry and listings that read it show the new mark. Not published yet; the owner runs `mcp-publisher publish` (see `REGISTRY.md`).
+
 - Cline install steps in the README and `llms-install.md`. The config sets `"type": "streamableHttp"`, because a missing type makes Cline use legacy SSE and `https://www.regdatalab.com/mcp` returns 405.
 
 ### Fixed

@@ -6,7 +6,8 @@ points at the hosted endpoint `https://www.regdatalab.com/mcp` and lists no npm
 package, so republishing it never needs an npm publish.
 
 - Name: `io.github.medley/fda-data` (the name already in the registry since 2026-02-07)
-- Version: `1.1.1`, published 2026-11-12 and marked latest in the registry. Each later publish needs a new, higher version
+- Version: `1.1.2` in this file (adds the `icons` array with the RegDataLab square icon). The registry still holds `1.1.1` (published 2026-11-12) until the owner publishes. Each later publish needs a new, higher version
+- Icon: `icons[0].src` is `https://www.regdatalab.com/images/regdatalab-directory-512.png` (512x512 PNG, HTTPS). Listings that read the registry, such as PulseMCP, pick it up after the publish
 - Tools: not stored in the entry; clients read them from the server. `GET https://www.regdatalab.com/api` is the authoritative list
 - Auth: OAuth sign-in, or an optional `Authorization: Bearer` header
 
@@ -23,5 +24,5 @@ curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.me
 
 The check should show the new version with `"isLatest":true`.
 
-Bump `version` (next: `1.1.2`) before every later publish. The registry
+Bump `version` (next after this publish: `1.1.3`) before every later publish. The registry
 refuses a version it already holds.
