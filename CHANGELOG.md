@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 
 - The npx wrapper's `--help` text and missing-key error say a new key starts with 50 credits, and 300 a month after email verification.
-- README matches the live connector: 52 tools (51 read-only tools over 35 FDA datasets, plus free `submit_feedback`), OAuth sign-in for Claude Code, Cursor, VS Code and Codex, the Claude connector directory listing, and current ChatGPT custom MCP server steps. ChatGPT's app directory does not list RegDataLab yet.
+- README matches the live connector: 54 tools (53 read-only tools over 35 FDA datasets, plus free `submit_feedback`), OAuth sign-in for Claude Code, Cursor, VS Code and Codex, the Claude connector directory listing, and current ChatGPT custom MCP server steps. ChatGPT's app directory does not list RegDataLab yet.
 - Config examples use the server name `regdatalab`, as the connect guide does. The VS Code button adds the hosted URL instead of the npx wrapper.
 - Added the FDA data source and independence statement.
 - New homepage screenshot and social preview image.
