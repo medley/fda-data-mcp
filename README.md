@@ -39,7 +39,7 @@ claude mcp add regdatalab-demo https://www.regdatalab.com/mcp \
   --header "Authorization: Bearer fda_demo_GKNDjUOjPbhLZZVPvRHDlY3zP_H3HXzTMRbHVD_I5rg"
 ```
 
-Then ask: "Check Baxter as a supplier." The demo key is shared by every visitor. Each IP address gets 10 requests per minute and 50 credits, and all visitors together share 60 requests per minute. For your own key, [sign up free](https://www.regdatalab.com/signup) (50 credits, no card), or add the bare URL and sign in as shown under [Quick Start](#quick-start).
+Then ask: "Check Baxter as a supplier." The shared demo key on the homepage allows 3 credits per IP address (1 live supplier check). For your own account, [sign up free](https://www.regdatalab.com/signup) for 6 free credits (2 supplier checks) after you verify your email (one-time, no monthly refill, no card), or add the URL `https://www.regdatalab.com/mcp` and sign in with your email as shown under [Quick Start](#quick-start).
 
 The same question in ChatGPT, from question to sourced answer:
 
@@ -80,7 +80,7 @@ The strongest current use case is **manufacturing and compliance intelligence** 
 
 The hosted endpoint is `https://www.regdatalab.com/mcp`. Pick the first path your client supports:
 
-1. **OAuth sign-in** (claude.ai, Claude Desktop, Claude Code, ChatGPT, Cursor, VS Code, Codex and other OAuth-capable clients): add the bare URL and sign in. No key in your config.
+1. **OAuth sign-in** (claude.ai, Claude Desktop, Claude Code, ChatGPT, Cursor, VS Code, Codex and other OAuth-capable clients): add the URL `https://www.regdatalab.com/mcp` and sign in with your email on the RegDataLab page. No API key needed.
 2. **Authorization header** (CI, scripts, the OpenAI API, Cline and other clients without sign-in): send `Authorization: Bearer YOUR_API_KEY`. Cline also needs `"type": "streamableHttp"`. See [Cline](#cline).
 3. **npx wrapper** (stdio-only clients): set `FDA_DATA_API_KEY`.
 
@@ -99,12 +99,12 @@ The [RegDataLab plugin](plugins/regdatalab) bundles this connector with five wor
 RegDataLab is listed in Claude's connector directory.
 
 1. Open **Customize > Connectors** and search for RegDataLab under **Discover**, or choose **Add custom connector** and enter only `https://www.regdatalab.com/mcp`. On Team and Enterprise plans an owner adds it in **Organization settings > Connectors**, then members click **Connect**.
-2. On the RegDataLab consent page, paste your RegDataLab API key and approve read-only access.
+2. Sign in with your email on the RegDataLab page and approve read-only access. No API key needed.
 3. Turn it on in a chat under **+ > Connectors**.
 
 ### ChatGPT
 
-RegDataLab is not in ChatGPT's app directory yet, so add it as a custom MCP server: on chatgpt.com open **Plugins**, click **Add**, choose **Add custom MCP server**, enter only `https://www.regdatalab.com/mcp` with Authentication set to **OAuth**, and sign in. Your plan or workspace must allow custom MCP servers. Then type `@RegDataLab` in a chat.
+RegDataLab is not in ChatGPT's app directory yet, so add it as a custom MCP server: on chatgpt.com open **Plugins**, click **Add**, choose **Add custom MCP server**, enter only `https://www.regdatalab.com/mcp` with Authentication set to **OAuth**, and sign in with your email on the RegDataLab page (no API key needed). Your plan or workspace must allow custom MCP servers. Then type `@RegDataLab` in a chat.
 
 ### Claude Code
 
@@ -276,7 +276,7 @@ The wrapper is a zero-dependency stdio-to-HTTP proxy:
 
 The version on npm can lag this repo; see [CHANGELOG.md](./CHANGELOG.md) for what each published version contains.
 
-If you do not have an API key yet, sign up at [regdatalab.com/signup](https://www.regdatalab.com/signup). A new key starts with 50 credits; verifying your email unlocks 300 free credits a month.
+If you do not have an API key yet, sign up at [regdatalab.com/signup](https://www.regdatalab.com/signup). Free plan: 6 free credits (2 supplier checks) after you verify your email. One-time, no monthly refill. No card.
 
 ## Example Prompts
 
@@ -316,12 +316,12 @@ For the current tool list and dataset freshness, use:
 ## Auth and Pricing
 
 - Sign up for an API key at [regdatalab.com/signup](https://www.regdatalab.com/signup)
-- OAuth-capable clients: add the bare URL and sign in; no key in your config
+- OAuth-capable clients (including claude.ai and ChatGPT): add the URL `https://www.regdatalab.com/mcp` and sign in with your email on the RegDataLab page. No API key needed
 - Other HTTP clients: send the `Authorization: Bearer YOUR_API_KEY` header
 - The npx wrapper: set `FDA_DATA_API_KEY=YOUR_API_KEY`
 - Never put a key in a URL or in an issue report
-- Each tool call uses credits, except `submit_feedback`, which is free (0 credits); calls that fail on bad input or a server error are free
-- A new account starts with 50 credits; verifying your email adds 300 free credits a month. No card required
+- A supplier risk summary (`fda_manufacturing_risk_summary`) costs 3 credits; most tools cost 1. `submit_feedback` is free (0 credits), and calls that fail on bad input or a server error are free
+- Free plan: 6 free credits (2 supplier checks) after you verify your email. One-time, no monthly refill. No card
 - Paid plans are listed at [regdatalab.com/pricing](https://www.regdatalab.com/pricing)
 
 ## Why This Repo Exists

@@ -2,7 +2,7 @@
 
 RegDataLab is a hosted MCP server at `https://www.regdatalab.com/mcp`. It is already running. Skip cloning, package install, and any local process. Connect Cline to that URL over Streamable HTTP.
 
-1. Get an API key at https://www.regdatalab.com/signup. A new key starts with 50 credits. No card is required. Keep the key out of any URL.
+1. Get an API key at https://www.regdatalab.com/signup. Free plan: 6 free credits (2 supplier checks) after you verify your email. One-time, no monthly refill. No card. A supplier risk summary (`fda_manufacturing_risk_summary`) costs 3 credits; most tools cost 1. Keep the key out of any URL.
 
 2. Open `~/.cline/data/settings/cline_mcp_settings.json` (the Cline CLI settings file). Create it if it is missing. In the Cline panel, the same file opens from the MCP Servers icon, then **Configure**, then **Configure MCP Servers**. On the **Remote Servers** tab, set **Transport Type** to **Streamable HTTP**.
 
