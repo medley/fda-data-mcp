@@ -63,6 +63,7 @@ Full walkthrough (4 minutes): [regdatalab-chatgpt-review-walkthrough.mp4](https:
 - Postman workspace with ready-made calls: [RegDataLab FDA Compliance Data](https://www.postman.com/regdatalab-3864502/regdatalab-fda-compliance-data)
 - Free CSV dataset (FDA warning letters and OAI inspections, 2021-2026, CC0): [Hugging Face](https://huggingface.co/datasets/regdatalab-org/fda-warning-letters-oai-inspections) and [Kaggle](https://www.kaggle.com/datasets/regdatalab/fda-warning-letters-and-oai-inspections-2021-2026)
 - Wrapper package source: [`package.json`](./package.json)
+- Prompt library: [prompts/](./prompts/)
 
 ## What It Does
 
